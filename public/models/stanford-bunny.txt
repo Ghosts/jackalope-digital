@@ -1,0 +1,6 @@
+Stanford Bunny STL
+
+Source: https://commons.wikimedia.org/wiki/File:Stanford_Bunny.stl
+License: Creative Commons Attribution 3.0 Unported
+Attribution: Stanford Bunny, author listed by Wikimedia Commons as Makerbot; original scan model by Greg Turk and Marc Levoy.
+Local modifications: rendered as a dark jackalope specimen with locally generated antlers.
