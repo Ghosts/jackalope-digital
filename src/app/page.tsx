@@ -243,13 +243,13 @@ export default function Home() {
       }
 
       if (compact) {
-        specimenPosition = [portrait ? -0.18 : -0.86, portrait ? 1.12 : 0.34, 0];
-        specimenScale = portrait ? 0.54 : 0.48;
+        specimenPosition = [portrait ? -0.16 : -0.86, portrait ? 0.94 : 0.34, 0];
+        specimenScale = portrait ? 0.94 : 0.56;
       }
 
       if (short) {
-        specimenPosition[1] += compact ? 0.78 : -0.1;
-        specimenScale *= compact ? 0.62 : 0.92;
+        specimenPosition[1] += compact ? 0.26 : -0.1;
+        specimenScale *= compact ? 0.82 : 0.92;
       }
 
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));

@@ -2,8 +2,33 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Jackalope Digital",
-  description: "Jackalope Digital. Software, tools, experiments. contact@jackalope.dev",
+  metadataBase: new URL("https://jackalope.dev"),
+  title: {
+    default: "Jackalope Digital",
+    template: "%s | Jackalope Digital",
+  },
+  description: "Jackalope Digital builds software, tools, and services.",
+  applicationName: "Jackalope Digital",
+  keywords: ["Jackalope Digital", "jackalope.dev", "software", "tools", "services"],
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "Jackalope Digital",
+    description: "Software, tools, and services from Jackalope Digital.",
+    url: "/",
+    siteName: "Jackalope Digital",
+    type: "website",
+  },
+  robots: {
+    follow: true,
+    index: true,
+  },
+  twitter: {
+    card: "summary",
+    title: "Jackalope Digital",
+    description: "Software, tools, and services from Jackalope Digital.",
+  },
 };
 
 export default function RootLayout({
