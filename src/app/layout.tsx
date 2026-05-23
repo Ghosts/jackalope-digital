@@ -10,6 +10,14 @@ export const metadata: Metadata = {
   description: "Jackalope Digital builds software, tools, and services.",
   applicationName: "Jackalope Digital",
   keywords: ["Jackalope Digital", "jackalope.dev", "software", "tools", "services"],
+  icons: {
+    icon: [
+      {
+        url: "/icon.svg",
+        type: "image/svg+xml",
+      },
+    ],
+  },
   alternates: {
     canonical: "/",
   },
