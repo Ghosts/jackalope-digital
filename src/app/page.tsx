@@ -305,64 +305,66 @@ export default function Home() {
         <section className={styles.terminal} aria-labelledby="title">
           <canvas ref={canvasRef} className={styles.scene} aria-label="Local combined jackalope mesh scan" />
 
-          <section className={styles.readout}>
-            <p className={styles.prompt}>
-              <span>guest@jackalope</span>:~$ wake
-            </p>
-            <h1 id="title">Jackalope Digital</h1>
-            <dl>
-              <div>
-                <dt>domain</dt>
-                <dd>jackalope.dev</dd>
-              </div>
-              <div>
-                <dt>work</dt>
-                <dd>software / tools / services</dd>
-              </div>
-              <div>
-                <dt>mail</dt>
-                <dd>contact@jackalope.dev</dd>
-              </div>
-            </dl>
-            <p className={styles.cursor} aria-hidden="true">
-              _
-            </p>
-          </section>
-        </section>
+          <div className={styles.column}>
+            <section className={styles.readout}>
+              <p className={styles.prompt}>
+                <span>guest@jackalope</span>:~$ wake
+              </p>
+              <h1 id="title">Jackalope Digital</h1>
+              <dl>
+                <div>
+                  <dt>domain</dt>
+                  <dd>jackalope.dev</dd>
+                </div>
+                <div>
+                  <dt>work</dt>
+                  <dd>software / tools / services</dd>
+                </div>
+                <div>
+                  <dt>mail</dt>
+                  <dd>contact@jackalope.dev</dd>
+                </div>
+              </dl>
+              <p className={styles.cursor} aria-hidden="true">
+                _
+              </p>
+            </section>
 
-        <section className={styles.products} aria-labelledby="products-title">
-          <p className={styles.prompt}>
-            <span>guest@jackalope</span>:~$ ls ./products
-          </p>
-          <h2 id="products-title" className={styles.productsTitle}>
-            What we ship
-          </h2>
+            <section className={styles.products} aria-labelledby="products-title">
+              <p className={styles.prompt}>
+                <span>guest@jackalope</span>:~$ ls ./products
+              </p>
+              <h2 id="products-title" className={styles.productsTitle}>
+                What we ship
+              </h2>
 
-          <ul className={styles.productGrid}>
-            <li>
-              <a
-                className={styles.productCard}
-                href="https://moxiedocs.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span className={styles.productLogo} aria-hidden="true">
-                  <Image src="/moxie-fox.svg" alt="" width={40} height={40} />
-                </span>
-                <span className={styles.productBody}>
-                  <span className={styles.productName}>
-                    Moxie Docs
-                    <span className={styles.productTag}>live</span>
-                  </span>
-                  <span className={styles.productDesc}>
-                    Living documentation for private GitHub repos. Generates searchable
-                    docs, checks PRs for alignment, and surfaces gaps before merge.
-                  </span>
-                  <span className={styles.productLink}>moxiedocs.com &#8599;</span>
-                </span>
-              </a>
-            </li>
-          </ul>
+              <ul className={styles.productGrid}>
+                <li>
+                  <a
+                    className={styles.productCard}
+                    href="https://moxiedocs.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <span className={styles.productLogo} aria-hidden="true">
+                      <Image src="/moxie-fox.svg" alt="" width={40} height={40} />
+                    </span>
+                    <span className={styles.productBody}>
+                      <span className={styles.productName}>
+                        Moxie Docs
+                        <span className={styles.productTag}>live</span>
+                      </span>
+                      <span className={styles.productDesc}>
+                        Living documentation for private GitHub repos. Generates searchable
+                        docs, checks PRs for alignment, and surfaces gaps before merge.
+                      </span>
+                      <span className={styles.productLink}>moxiedocs.com &#8599;</span>
+                    </span>
+                  </a>
+                </li>
+              </ul>
+            </section>
+          </div>
         </section>
       </main>
 
