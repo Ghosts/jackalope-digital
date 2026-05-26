@@ -350,10 +350,7 @@ export default function Home() {
                       <Image src="/moxie-fox.svg" alt="" width={40} height={40} />
                     </span>
                     <span className={styles.productBody}>
-                      <span className={styles.productName}>
-                        Moxie Docs
-                        <span className={styles.productTag}>live</span>
-                      </span>
+                      <span className={styles.productName}>Moxie Docs</span>
                       <span className={styles.productDesc}>
                         Living documentation for private GitHub repos. Generates searchable
                         docs, checks PRs for alignment, and surfaces gaps before merge.

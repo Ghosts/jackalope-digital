@@ -47,15 +47,17 @@
   z-index: 1;
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
   gap: 1.25rem;
-  width: min(100%, 34rem);
+  width: min(100%, 42rem);
   max-width: calc(100vw - 2rem);
   margin-right: clamp(0rem, 5vw, 5rem);
 }
 
 .readout {
   position: relative;
-  width: 100%;
+  width: min(100%, 34rem);
+  align-self: flex-end;
   padding: clamp(1rem, 2vw, 1.45rem);
   border-left: 1px solid var(--line-hot);
   background:
@@ -133,6 +135,7 @@
 
 .products {
   position: relative;
+  align-self: stretch;
   width: 100%;
   padding-left: clamp(0.6rem, 1.5vw, 1rem);
   border-left: 1px solid var(--line);
@@ -152,7 +155,7 @@
 
 .productGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
   gap: 0.8rem;
   list-style: none;
 }
@@ -197,22 +200,9 @@
 }
 
 .productName {
-  display: flex;
-  align-items: center;
-  gap: 0.65rem;
   color: var(--white);
   font-size: 1.05rem;
   font-weight: 700;
-}
-
-.productTag {
-  padding: 0.1rem 0.45rem;
-  color: var(--cyan);
-  font-size: 0.62rem;
-  font-weight: 650;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  border: 1px solid rgba(168, 231, 230, 0.4);
 }
 
 .productDesc {
@@ -255,7 +245,7 @@
   }
 
   .column {
-    width: min(100%, 31rem);
+    width: min(100%, 38rem);
     margin-right: 0;
   }
 
