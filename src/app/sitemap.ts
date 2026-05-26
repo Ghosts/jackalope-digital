@@ -7,5 +7,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
       url: "https://jackalope.dev/",
     },
+    {
+      changeFrequency: "yearly",
+      priority: 0.3,
+      url: "https://jackalope.dev/privacy",
+    },
+    {
+      changeFrequency: "yearly",
+      priority: 0.3,
+      url: "https://jackalope.dev/terms",
+    },
   ];
 }

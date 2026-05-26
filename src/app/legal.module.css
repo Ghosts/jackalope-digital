@@ -1,0 +1,78 @@
+.legal {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 46rem);
+  margin: 0 auto;
+  padding: clamp(3rem, 8vw, 6rem) clamp(1rem, 4vw, 3rem) clamp(2rem, 5vw, 4rem);
+}
+
+.back {
+  display: inline-block;
+  margin-bottom: 1.8rem;
+  color: var(--lavender);
+  font-size: 0.8rem;
+}
+
+.back:hover,
+.back:focus-visible {
+  text-decoration: underline;
+  outline: none;
+}
+
+.prompt {
+  margin: 0 0 1.2rem;
+  color: var(--dim);
+  font-size: 0.82rem;
+  font-weight: 650;
+}
+
+.prompt span {
+  color: var(--cyan);
+}
+
+.legal h1 {
+  margin: 0 0 0.4rem;
+  color: var(--white);
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  font-weight: 740;
+  line-height: 1;
+}
+
+.updated {
+  margin: 0 0 2.6rem;
+  color: var(--dim);
+  font-size: 0.78rem;
+}
+
+.legal h2 {
+  margin: 2.4rem 0 0.8rem;
+  color: var(--lavender);
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.legal p,
+.legal li {
+  color: var(--soft);
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+.legal ul {
+  margin: 0.4rem 0;
+  padding-left: 1.2rem;
+}
+
+.legal li {
+  margin: 0.3rem 0;
+}
+
+.legal a:not(.back) {
+  color: var(--cyan);
+}
+
+.legal a:not(.back):hover,
+.legal a:not(.back):focus-visible {
+  text-decoration: underline;
+  outline: none;
+}
