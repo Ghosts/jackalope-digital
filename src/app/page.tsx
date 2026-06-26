@@ -359,6 +359,32 @@ export default function Home() {
                     </span>
                   </a>
                 </li>
+                <li>
+                  <a
+                    className={styles.productCard}
+                    href="https://github.com/Jackalope-Dev/lichess-streamer-mode"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <span className={styles.productLogo} aria-hidden="true">
+                      <Image
+                        src="/streamer-mode.svg"
+                        alt=""
+                        width={40}
+                        height={40}
+                      />
+                    </span>
+                    <span className={styles.productBody}>
+                      <span className={styles.productName}>Streamer Mode for Lichess</span>
+                      <span className={styles.productDesc}>
+                        Browser extension that hides every username on Lichess so streamers
+                        can play without getting stream-sniped. One-click toggle, fully
+                        private, free.
+                      </span>
+                      <span className={styles.productLink}>github.com &#8599;</span>
+                    </span>
+                  </a>
+                </li>
               </ul>
             </section>
           </div>
