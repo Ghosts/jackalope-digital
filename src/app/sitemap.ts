@@ -5,17 +5,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       changeFrequency: "monthly",
       priority: 1,
-      url: "https://jackalope.dev/",
+      url: "https://jackalope.digital/",
     },
     {
       changeFrequency: "yearly",
       priority: 0.3,
-      url: "https://jackalope.dev/privacy",
+      url: "https://jackalope.digital/privacy",
     },
     {
       changeFrequency: "yearly",
       priority: 0.3,
-      url: "https://jackalope.dev/terms",
+      url: "https://jackalope.digital/terms",
     },
   ];
 }

@@ -1,15 +1,28 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
+export const viewport: Viewport = {
+  themeColor: "#0d0c0b",
+};
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://jackalope.dev"),
+  metadataBase: new URL("https://jackalope.digital"),
   title: {
-    default: "Jackalope Digital",
+    default: "Jackalope Digital | Software, Tools & Services",
     template: "%s | Jackalope Digital",
   },
-  description: "Jackalope Digital builds software, tools, and services.",
+  description:
+    "Jackalope Digital is an independent software studio building developer tools, documentation systems, and digital services.",
   applicationName: "Jackalope Digital",
-  keywords: ["Jackalope Digital", "jackalope.dev", "software", "tools", "services"],
+  keywords: [
+    "Jackalope Digital",
+    "jackalope.digital",
+    "Moxie Docs",
+    "software studio",
+    "developer tools",
+    "documentation automation",
+  ],
+  manifest: "/site.webmanifest",
   icons: {
     icon: [
       {
@@ -23,10 +36,19 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "Jackalope Digital",
-    description: "Software, tools, and services from Jackalope Digital.",
+    title: "Jackalope Digital | Software, Tools & Services",
+    description:
+      "Independent software studio building developer tools, documentation systems, and digital services.",
     url: "/",
     siteName: "Jackalope Digital",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Jackalope Digital",
+      },
+    ],
     type: "website",
   },
   robots: {
@@ -34,9 +56,11 @@ export const metadata: Metadata = {
     index: true,
   },
   twitter: {
-    card: "summary",
-    title: "Jackalope Digital",
-    description: "Software, tools, and services from Jackalope Digital.",
+    card: "summary_large_image",
+    title: "Jackalope Digital | Software, Tools & Services",
+    description:
+      "Independent software studio building developer tools, documentation systems, and digital services.",
+    images: ["/og-image.png"],
   },
 };
 

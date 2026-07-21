@@ -5,7 +5,7 @@ import styles from "../legal.module.css";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "How Jackalope Digital LLC handles information on jackalope.dev.",
+  description: "How Jackalope Digital LLC handles information on jackalope.digital.",
   alternates: {
     canonical: "/privacy",
   },
@@ -16,7 +16,7 @@ export default function PrivacyPage() {
     <>
       <main className={styles.legal}>
         <Link className={styles.back} href="/">
-          &#8592; back to jackalope.dev
+          &#8592; back to jackalope.digital
         </Link>
         <p className={styles.prompt}>
           <span>guest@jackalope</span>:~$ cat PRIVACY
@@ -27,7 +27,7 @@ export default function PrivacyPage() {
         <p>
           This Privacy Policy explains how Jackalope Digital LLC (&ldquo;Jackalope
           Digital,&rdquo; &ldquo;we,&rdquo; &ldquo;us&rdquo;) handles information in
-          connection with this website at jackalope.dev (the &ldquo;Site&rdquo;). The
+          connection with this website at jackalope.digital (the &ldquo;Site&rdquo;). The
           Site is a static, informational page. We have built it to do as little with
           your data as possible.
         </p>
@@ -74,7 +74,7 @@ export default function PrivacyPage() {
         <h2>Contact</h2>
         <p>
           Questions about this policy? Reach us at{" "}
-          <a href="mailto:contact@jackalope.dev">contact@jackalope.dev</a>.
+          <a href="mailto:contact@jackalope.digital">contact@jackalope.digital</a>.
         </p>
       </main>
 

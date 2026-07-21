@@ -5,7 +5,7 @@ import styles from "../legal.module.css";
 
 export const metadata: Metadata = {
   title: "Terms of Service",
-  description: "The terms that govern use of jackalope.dev.",
+  description: "The terms that govern use of jackalope.digital.",
   alternates: {
     canonical: "/terms",
   },
@@ -16,7 +16,7 @@ export default function TermsPage() {
     <>
       <main className={styles.legal}>
         <Link className={styles.back} href="/">
-          &#8592; back to jackalope.dev
+          &#8592; back to jackalope.digital
         </Link>
         <p className={styles.prompt}>
           <span>guest@jackalope</span>:~$ cat TERMS
@@ -26,7 +26,7 @@ export default function TermsPage() {
 
         <p>
           These Terms of Service (&ldquo;Terms&rdquo;) govern your use of the website at
-          jackalope.dev (the &ldquo;Site&rdquo;), operated by Jackalope Digital LLC
+          jackalope.digital (the &ldquo;Site&rdquo;), operated by Jackalope Digital LLC
           (&ldquo;Jackalope Digital,&rdquo; &ldquo;we,&rdquo; &ldquo;us&rdquo;). By
           accessing the Site, you agree to these Terms. If you do not agree, please do
           not use the Site.
@@ -84,7 +84,7 @@ export default function TermsPage() {
         <h2>Contact</h2>
         <p>
           Questions about these Terms? Reach us at{" "}
-          <a href="mailto:contact@jackalope.dev">contact@jackalope.dev</a>.
+          <a href="mailto:contact@jackalope.digital">contact@jackalope.digital</a>.
         </p>
       </main>
 

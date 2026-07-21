@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader.js";
 import { mergeGeometries } from "three/examples/jsm/utils/BufferGeometryUtils.js";
@@ -10,6 +10,60 @@ import styles from "./page.module.css";
 
 export default function Home() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const productsRef = useRef<HTMLDivElement>(null);
+  const aboutRef = useRef<HTMLDivElement>(null);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://jackalope.digital/#organization",
+        "name": "Jackalope Digital LLC",
+        "url": "https://jackalope.digital",
+        "logo": "https://jackalope.digital/icon.png",
+        "email": "contact@jackalope.digital",
+        "description": "Jackalope Digital builds software, tools, and services.",
+        "sameAs": ["https://github.com/Jackalope-Dev"],
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://moxiedocs.com/#software",
+        "name": "Moxie Docs",
+        "url": "https://moxiedocs.com",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Web",
+        "description":
+          "Living documentation for private GitHub repos. Generates searchable docs, checks PRs for alignment, and surfaces gaps before merge.",
+        "publisher": {
+          "@id": "https://jackalope.digital/#organization",
+        },
+      },
+    ],
+  };
+
+  const handleCopyEmail = (e: React.MouseEvent) => {
+    e.preventDefault();
+    navigator.clipboard.writeText("contact@jackalope.digital");
+    setToastMessage("contact@jackalope.digital copied to clipboard");
+    setTimeout(() => {
+      setToastMessage(null);
+    }, 3000);
+  };
+
+  const handleCommand = (cmd: string) => {
+    if (cmd === "moxie" && productsRef.current) {
+      productsRef.current.scrollIntoView({ behavior: "smooth" });
+    } else if (cmd === "about" && aboutRef.current) {
+      aboutRef.current.scrollIntoView({ behavior: "smooth" });
+    } else if (cmd === "contact") {
+      handleCopyEmail({ preventDefault: () => {} } as React.MouseEvent);
+    } else if (cmd === "help") {
+      setToastMessage("Commands: moxie | about | contact | reset");
+      setTimeout(() => setToastMessage(null), 4000);
+    }
+  };
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -129,8 +183,7 @@ export default function Home() {
     }
 
     function createAntler(points: Array<[number, number, number]>, radius: number) {
-      const geometry = createAntlerGeometry(points, radius);
-      return geometry;
+      return createAntlerGeometry(points, radius);
     }
 
     function createAntlerRoot(side: number) {
@@ -301,20 +354,56 @@ export default function Home() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       <main>
         <section className={styles.terminal} aria-labelledby="title">
-          <canvas ref={canvasRef} className={styles.scene} aria-label="Local combined jackalope mesh scan" />
+          <canvas
+            ref={canvasRef}
+            className={styles.scene}
+            aria-label="Local combined jackalope mesh scan"
+          />
 
           <div className={styles.column}>
             <section className={styles.readout}>
-              <p className={styles.prompt}>
-                <span>guest@jackalope</span>:~$ wake
-              </p>
+              <div className={styles.promptHeader}>
+                <p className={styles.prompt}>
+                  <span>guest@jackalope</span>:~$ wake
+                </p>
+                <div className={styles.commandChips}>
+                  <button
+                    type="button"
+                    className={styles.chip}
+                    onClick={() => handleCommand("moxie")}
+                  >
+                    moxie
+                  </button>
+                  <button
+                    type="button"
+                    className={styles.chip}
+                    onClick={() => handleCommand("about")}
+                  >
+                    about
+                  </button>
+                  <button
+                    type="button"
+                    className={styles.chip}
+                    onClick={() => handleCommand("contact")}
+                  >
+                    contact
+                  </button>
+                </div>
+              </div>
+
               <h1 id="title">Jackalope Digital</h1>
+
               <dl>
                 <div>
                   <dt>domain</dt>
-                  <dd>jackalope.dev</dd>
+                  <dd>jackalope.digital</dd>
                 </div>
                 <div>
                   <dt>work</dt>
@@ -322,70 +411,95 @@ export default function Home() {
                 </div>
                 <div>
                   <dt>mail</dt>
-                  <dd>contact@jackalope.dev</dd>
+                  <dd>
+                    <button
+                      type="button"
+                      className={styles.copyEmailBtn}
+                      onClick={handleCopyEmail}
+                      title="Click to copy email address"
+                    >
+                      contact@jackalope.digital
+                      <span className={styles.copyIcon}>&#x2309;</span>
+                    </button>
+                  </dd>
                 </div>
               </dl>
+
+              {toastMessage && (
+                <div className={styles.toastNotification} role="status">
+                  <span className={styles.toastPrompt}>[sys]:</span> {toastMessage}
+                </div>
+              )}
+
               <p className={styles.cursor} aria-hidden="true">
                 _
               </p>
             </section>
 
-            <section className={styles.products} aria-labelledby="products-title">
+            <section
+              ref={aboutRef}
+              className={styles.about}
+              aria-labelledby="about-title"
+            >
+              <p className={styles.prompt}>
+                <span>guest@jackalope</span>:~$ cat ABOUT.md
+              </p>
+              <h2 id="about-title" className={styles.sectionTitle}>
+                Studio Overview
+              </h2>
+              <p className={styles.aboutText}>
+                Jackalope Digital LLC is an independent software studio crafting targeted
+                developer tools, documentation systems, and digital utilities. We build fast,
+                focused tools engineered for clarity, reliability, and privacy.
+              </p>
+            </section>
+
+            <section
+              ref={productsRef}
+              className={styles.products}
+              aria-labelledby="products-title"
+            >
               <p className={styles.prompt}>
                 <span>guest@jackalope</span>:~$ ls ./products
               </p>
-              <h2 id="products-title" className={styles.productsTitle}>
-                What we ship
+              <h2 id="products-title" className={styles.sectionTitle}>
+                Featured Product
               </h2>
 
-              <ul className={styles.productGrid}>
-                <li>
-                  <a
-                    className={styles.productCard}
-                    href="https://moxiedocs.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+              <div className={styles.flagshipContainer}>
+                <a
+                  className={styles.flagshipCard}
+                  href="https://moxiedocs.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <div className={styles.flagshipHeader}>
+                    <span className={styles.flagshipBadge}>FLAGSHIP PRODUCT</span>
                     <span className={styles.productLogo} aria-hidden="true">
-                      <Image src="/moxie-fox.svg" alt="" width={40} height={40} />
+                      <Image src="/moxie-fox.svg" alt="" width={44} height={44} />
                     </span>
-                    <span className={styles.productBody}>
-                      <span className={styles.productName}>Moxie Docs</span>
-                      <span className={styles.productDesc}>
-                        Living documentation for private GitHub repos. Generates searchable
-                        docs, checks PRs for alignment, and surfaces gaps before merge.
-                      </span>
-                      <span className={styles.productLink}>moxiedocs.com &#8599;</span>
+                  </div>
+
+                  <div className={styles.productBody}>
+                    <span className={styles.productName}>Moxie Docs</span>
+                    <span className={styles.productDesc}>
+                      Living documentation for private GitHub repos. Generates searchable
+                      docs, checks PRs for alignment, and surfaces gaps before merge.
                     </span>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className={styles.productCard}
-                    href="https://github.com/Jackalope-Dev/lichess-streamer-mode"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <span className={styles.productLogo} aria-hidden="true">
-                      <Image
-                        src="/streamer-mode.svg"
-                        alt=""
-                        width={40}
-                        height={40}
-                      />
+
+                    <div className={styles.tagGrid}>
+                      <span className={styles.tag}>Living Docs</span>
+                      <span className={styles.tag}>PR Alignment</span>
+                      <span className={styles.tag}>Private GitHub Repos</span>
+                      <span className={styles.tag}>Automated Insights</span>
+                    </div>
+
+                    <span className={styles.productLink}>
+                      moxiedocs.com <span className={styles.arrow} aria-hidden="true">&#8599;</span>
                     </span>
-                    <span className={styles.productBody}>
-                      <span className={styles.productName}>Streamer Mode for Lichess</span>
-                      <span className={styles.productDesc}>
-                        Browser extension that hides every username on Lichess so streamers
-                        can play without getting stream-sniped. One-click toggle, fully
-                        private, free.
-                      </span>
-                      <span className={styles.productLink}>github.com &#8599;</span>
-                    </span>
-                  </a>
-                </li>
-              </ul>
+                  </div>
+                </a>
+              </div>
             </section>
           </div>
         </section>

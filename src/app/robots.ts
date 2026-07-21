@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       userAgent: "*",
     },
-    sitemap: "https://jackalope.dev/sitemap.xml",
+    sitemap: "https://jackalope.digital/sitemap.xml",
   };
 }

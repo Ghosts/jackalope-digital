@@ -6,6 +6,10 @@
   "compatibility_flags": [
     "nodejs_compat"
   ],
+  "routes": [
+    { "pattern": "jackalope.digital", "custom_domain": true },
+    { "pattern": "www.jackalope.digital", "custom_domain": true }
+  ],
   "assets": {
     "directory": ".open-next/assets",
     "binding": "ASSETS"
