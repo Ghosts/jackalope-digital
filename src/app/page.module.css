@@ -248,6 +248,9 @@
 }
 
 .flagshipContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.1rem;
   margin-top: 0.6rem;
 }
 

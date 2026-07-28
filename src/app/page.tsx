@@ -40,6 +40,19 @@ export default function Home() {
           "@id": "https://jackalope.digital/#organization",
         },
       },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://allmcps.com/#software",
+        "name": "AllMCPs",
+        "url": "https://allmcps.com",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Web",
+        "description":
+          "The definitive directory for discovering and installing Model Context Protocol servers.",
+        "publisher": {
+          "@id": "https://jackalope.digital/#organization",
+        },
+      },
     ],
   };
 
@@ -463,7 +476,7 @@ export default function Home() {
                 <span>guest@jackalope</span>:~$ ls ./products
               </p>
               <h2 id="products-title" className={styles.sectionTitle}>
-                Featured Product
+                Featured Products
               </h2>
 
               <div className={styles.flagshipContainer}>
@@ -496,6 +509,39 @@ export default function Home() {
 
                     <span className={styles.productLink}>
                       moxiedocs.com <span className={styles.arrow} aria-hidden="true">&#8599;</span>
+                    </span>
+                  </div>
+                </a>
+
+                <a
+                  className={styles.flagshipCard}
+                  href="https://allmcps.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <div className={styles.flagshipHeader}>
+                    <span className={styles.flagshipBadge}>PRODUCT</span>
+                    <span className={styles.productLogo} aria-hidden="true">
+                      <Image src="/allmcps-icon.svg" alt="" width={44} height={44} />
+                    </span>
+                  </div>
+
+                  <div className={styles.productBody}>
+                    <span className={styles.productName}>AllMCPs</span>
+                    <span className={styles.productDesc}>
+                      The definitive directory for discovering and installing Model Context
+                      Protocol servers, so AI agents can find the right tools fast.
+                    </span>
+
+                    <div className={styles.tagGrid}>
+                      <span className={styles.tag}>MCP Directory</span>
+                      <span className={styles.tag}>Server Discovery</span>
+                      <span className={styles.tag}>One-Click Install</span>
+                      <span className={styles.tag}>Agent Tooling</span>
+                    </div>
+
+                    <span className={styles.productLink}>
+                      allmcps.com <span className={styles.arrow} aria-hidden="true">&#8599;</span>
                     </span>
                   </div>
                 </a>
