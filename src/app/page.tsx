@@ -1195,11 +1195,11 @@ export default function Home() {
                 </a>
               </div>
             </section>
+
+            <SiteFooter />
           </div>
         </section>
       </main>
-
-      <SiteFooter />
     </>
   );
 }

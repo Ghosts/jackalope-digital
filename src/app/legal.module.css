@@ -1,4 +1,16 @@
+.legalWrapper {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  max-height: 100dvh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
 .legal {
+  flex: 1 0 auto;
   position: relative;
   z-index: 1;
   width: min(100%, 46rem);

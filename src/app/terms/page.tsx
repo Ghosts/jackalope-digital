@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function TermsPage() {
   return (
-    <>
+    <div className={styles.legalWrapper}>
       <main className={styles.legal}>
         <Link className={styles.back} href="/">
           &#8592; back to jackalope.digital
@@ -89,6 +89,6 @@ export default function TermsPage() {
       </main>
 
       <SiteFooter />
-    </>
+    </div>
   );
 }
