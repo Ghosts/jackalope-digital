@@ -40,7 +40,6 @@ export default function Home() {
   const terminalLogRef = useRef<HTMLDivElement>(null);
   const spinVelocityRef = useRef<number>(0);
 
-  const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [commandInput, setCommandInput] = useState<string>("");
   const [terminalLogs, setTerminalLogs] = useState<TerminalLog[]>([]);
   const [isTerminalOpen, setIsTerminalOpen] = useState<boolean>(false);
@@ -101,15 +100,6 @@ export default function Home() {
       },
     ],
   };
-
-  const handleCopyEmail = useCallback((e?: React.MouseEvent) => {
-    if (e) e.preventDefault();
-    navigator.clipboard.writeText("contact@jackalope.digital");
-    setToastMessage("contact@jackalope.digital copied to clipboard");
-    setTimeout(() => {
-      setToastMessage(null);
-    }, 3000);
-  }, []);
 
   const trigger3dSpin = useCallback(() => {
     spinVelocityRef.current = 0.28;
@@ -331,7 +321,9 @@ export default function Home() {
       case "contact":
       case "email":
       case "mail":
-        handleCopyEmail();
+        if (typeof navigator !== "undefined" && navigator.clipboard) {
+          navigator.clipboard.writeText("contact@jackalope.digital");
+        }
         output = (
           <div className={styles.cmdOutputBlock}>
             <p className={styles.cmdHeader}>STUDIO CONTACT CHANNEL</p>
@@ -561,7 +553,12 @@ export default function Home() {
         terminalLogRef.current.scrollTop = terminalLogRef.current.scrollHeight;
       }
     }, 50);
-  }, [handleCopyEmail, trigger3dSpin]);
+  }, [trigger3dSpin]);
+
+  const handleCopyEmail = useCallback((e?: React.MouseEvent) => {
+    if (e) e.preventDefault();
+    executeCommand("contact");
+  }, [executeCommand]);
 
   useEffect(() => {
     const handleGlobalKeyDown = (e: KeyboardEvent) => {
@@ -919,72 +916,9 @@ export default function Home() {
             aria-label="Local combined jackalope mesh scan"
           />
 
-          {/* Stylized Floating Terminal Window (Left side over Jackalope specimen) */}
-          {isTerminalOpen && terminalLogs.length > 0 && (
-            <aside
-              className={styles.terminalWindow}
-              aria-label="Terminal Output Window"
-            >
-              <div className={styles.windowHeader}>
-                <div className={styles.windowTitle}>
-                  <span className={styles.statusDot} aria-hidden="true"></span>
-                  <span>TERMINAL_OUTPUT.LOG</span>
-                  <span className={styles.windowLogCount}>({terminalLogs.length})</span>
-                </div>
-                <div className={styles.windowActions}>
-                  <button
-                    type="button"
-                    className={styles.clearBtn}
-                    onClick={() => {
-                      setTerminalLogs([]);
-                      setIsTerminalOpen(false);
-                    }}
-                    title="Clear terminal history"
-                  >
-                    clear
-                  </button>
-                  <button
-                    type="button"
-                    className={styles.windowCloseBtn}
-                    onClick={() => setIsTerminalOpen(false)}
-                    aria-label="Close terminal output window"
-                    title="Close window (Esc)"
-                  >
-                    &#x2715;
-                  </button>
-                </div>
-              </div>
-
-              <div className={styles.windowBody} ref={terminalLogRef}>
-                {terminalLogs.map((log) => (
-                  <div key={log.id} className={styles.terminalLogEntry}>
-                    <div className={styles.logPromptLine}>
-                      <span className={styles.logTimestamp}>[{log.timestamp}]</span>
-                      <span className={styles.logUser}>guest@jackalope:~$</span>
-                      <span className={styles.logCmd}>{log.command}</span>
-                    </div>
-                    <div className={styles.logOutputBody}>{log.output}</div>
-                  </div>
-                ))}
-              </div>
-
-              <div className={styles.windowFooter}>
-                <span className={styles.windowFooterHint}>
-                  Press <kbd className={styles.kbd}>Esc</kbd> or click &#x2715; to close
-                </span>
-                <button
-                  type="button"
-                  className={styles.windowFooterCloseBtn}
-                  onClick={() => setIsTerminalOpen(false)}
-                >
-                  Close Window &times;
-                </button>
-              </div>
-            </aside>
-          )}
-
-          <div className={styles.column}>
-            <section className={styles.readout}>
+          {/* Left-Side Terminal Dock (Input Bar & Output Window over 3D model) */}
+          <div className={styles.terminalSide}>
+            <div className={styles.terminalBar}>
               <div className={styles.promptHeader}>
                 <div className={styles.prompt}>
                   <span>guest@jackalope</span>:~$ <span className={styles.promptActive}>interactive</span>
@@ -1030,7 +964,75 @@ export default function Home() {
                   run &#8629;
                 </button>
               </form>
+            </div>
 
+            {/* Stylized Floating Terminal Window */}
+            {isTerminalOpen && terminalLogs.length > 0 && (
+              <aside
+                className={styles.terminalWindow}
+                aria-label="Terminal Output Window"
+              >
+                <div className={styles.windowHeader}>
+                  <div className={styles.windowTitle}>
+                    <span className={styles.statusDot} aria-hidden="true"></span>
+                    <span>TERMINAL_OUTPUT.LOG</span>
+                    <span className={styles.windowLogCount}>({terminalLogs.length})</span>
+                  </div>
+                  <div className={styles.windowActions}>
+                    <button
+                      type="button"
+                      className={styles.clearBtn}
+                      onClick={() => {
+                        setTerminalLogs([]);
+                        setIsTerminalOpen(false);
+                      }}
+                      title="Clear terminal history"
+                    >
+                      clear
+                    </button>
+                    <button
+                      type="button"
+                      className={styles.windowCloseBtn}
+                      onClick={() => setIsTerminalOpen(false)}
+                      aria-label="Close terminal output window"
+                      title="Close window (Esc)"
+                    >
+                      &#x2715;
+                    </button>
+                  </div>
+                </div>
+
+                <div className={styles.windowBody} ref={terminalLogRef}>
+                  {terminalLogs.map((log) => (
+                    <div key={log.id} className={styles.terminalLogEntry}>
+                      <div className={styles.logPromptLine}>
+                        <span className={styles.logTimestamp}>[{log.timestamp}]</span>
+                        <span className={styles.logUser}>guest@jackalope:~$</span>
+                        <span className={styles.logCmd}>{log.command}</span>
+                      </div>
+                      <div className={styles.logOutputBody}>{log.output}</div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className={styles.windowFooter}>
+                  <span className={styles.windowFooterHint}>
+                    Press <kbd className={styles.kbd}>Esc</kbd> or click &#x2715; to close
+                  </span>
+                  <button
+                    type="button"
+                    className={styles.windowFooterCloseBtn}
+                    onClick={() => setIsTerminalOpen(false)}
+                  >
+                    Close Window &times;
+                  </button>
+                </div>
+              </aside>
+            )}
+          </div>
+
+          <div className={styles.column}>
+            <section className={styles.readout}>
               <h1 id="title">Jackalope Digital</h1>
 
               <dl>
@@ -1049,7 +1051,7 @@ export default function Home() {
                       type="button"
                       className={styles.copyEmailBtn}
                       onClick={handleCopyEmail}
-                      title="Click to copy email address"
+                      title="Copy email and open contact in terminal"
                     >
                       contact@jackalope.digital
                       <span className={styles.copyIcon}>&#x2309;</span>
@@ -1057,16 +1059,6 @@ export default function Home() {
                   </dd>
                 </div>
               </dl>
-
-              {toastMessage && (
-                <div className={styles.toastNotification} role="status">
-                  <span className={styles.toastPrompt}>[sys]:</span> {toastMessage}
-                </div>
-              )}
-
-              <p className={styles.cursor} aria-hidden="true">
-                _
-              </p>
             </section>
 
             <section
