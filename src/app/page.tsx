@@ -43,6 +43,7 @@ export default function Home() {
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [commandInput, setCommandInput] = useState<string>("");
   const [terminalLogs, setTerminalLogs] = useState<TerminalLog[]>([]);
+  const [isTerminalOpen, setIsTerminalOpen] = useState<boolean>(false);
   const [history, setHistory] = useState<string[]>([]);
   const [historyIndex, setHistoryIndex] = useState<number>(-1);
 
@@ -133,8 +134,11 @@ export default function Home() {
     if (cmd === "clear" || cmd === "cls" || cmd === "reset") {
       setTerminalLogs([]);
       setCommandInput("");
+      setIsTerminalOpen(false);
       return;
     }
+
+    setIsTerminalOpen(true);
 
     switch (cmd) {
       case "help":
@@ -166,7 +170,7 @@ export default function Home() {
                 <div><span className={styles.codeTag}>clear</span> - Wipe terminal output history</div>
               </div>
             </div>
-            <p className={styles.cmdTip}>Tip: Use [Up/Down] arrows for history, [Tab] to autocomplete, or click any chip above.</p>
+            <p className={styles.cmdTip}>Tip: Use [Up/Down] arrows for command history, [Tab] to autocomplete, [Esc] to close window.</p>
           </div>
         );
         break;
@@ -532,7 +536,7 @@ export default function Home() {
           <div className={styles.cmdOutputBlock}>
             <p className={styles.cmdError}>Command not found: &apos;{trimmed}&apos;</p>
             <p className={styles.mutedText}>
-              Type <span className={styles.codeTag}>help</span> or click any command chip above to see available options.
+              Type <span className={styles.codeTag}>help</span> to see all available commands.
             </p>
           </div>
         );
@@ -559,10 +563,24 @@ export default function Home() {
     }, 50);
   }, [handleCopyEmail, trigger3dSpin]);
 
+  useEffect(() => {
+    const handleGlobalKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && isTerminalOpen) {
+        setIsTerminalOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleGlobalKeyDown);
+    return () => window.removeEventListener("keydown", handleGlobalKeyDown);
+  }, [isTerminalOpen]);
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       e.preventDefault();
       executeCommand(commandInput);
+    } else if (e.key === "Escape") {
+      if (isTerminalOpen) {
+        setIsTerminalOpen(false);
+      }
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
       if (history.length > 0) {
@@ -901,86 +919,87 @@ export default function Home() {
             aria-label="Local combined jackalope mesh scan"
           />
 
+          {/* Stylized Floating Terminal Window (Left side over Jackalope specimen) */}
+          {isTerminalOpen && terminalLogs.length > 0 && (
+            <aside
+              className={styles.terminalWindow}
+              aria-label="Terminal Output Window"
+            >
+              <div className={styles.windowHeader}>
+                <div className={styles.windowTitle}>
+                  <span className={styles.statusDot} aria-hidden="true"></span>
+                  <span>TERMINAL_OUTPUT.LOG</span>
+                  <span className={styles.windowLogCount}>({terminalLogs.length})</span>
+                </div>
+                <div className={styles.windowActions}>
+                  <button
+                    type="button"
+                    className={styles.clearBtn}
+                    onClick={() => {
+                      setTerminalLogs([]);
+                      setIsTerminalOpen(false);
+                    }}
+                    title="Clear terminal history"
+                  >
+                    clear
+                  </button>
+                  <button
+                    type="button"
+                    className={styles.windowCloseBtn}
+                    onClick={() => setIsTerminalOpen(false)}
+                    aria-label="Close terminal output window"
+                    title="Close window (Esc)"
+                  >
+                    &#x2715;
+                  </button>
+                </div>
+              </div>
+
+              <div className={styles.windowBody} ref={terminalLogRef}>
+                {terminalLogs.map((log) => (
+                  <div key={log.id} className={styles.terminalLogEntry}>
+                    <div className={styles.logPromptLine}>
+                      <span className={styles.logTimestamp}>[{log.timestamp}]</span>
+                      <span className={styles.logUser}>guest@jackalope:~$</span>
+                      <span className={styles.logCmd}>{log.command}</span>
+                    </div>
+                    <div className={styles.logOutputBody}>{log.output}</div>
+                  </div>
+                ))}
+              </div>
+
+              <div className={styles.windowFooter}>
+                <span className={styles.windowFooterHint}>
+                  Press <kbd className={styles.kbd}>Esc</kbd> or click &#x2715; to close
+                </span>
+                <button
+                  type="button"
+                  className={styles.windowFooterCloseBtn}
+                  onClick={() => setIsTerminalOpen(false)}
+                >
+                  Close Window &times;
+                </button>
+              </div>
+            </aside>
+          )}
+
           <div className={styles.column}>
             <section className={styles.readout}>
               <div className={styles.promptHeader}>
                 <div className={styles.prompt}>
                   <span>guest@jackalope</span>:~$ <span className={styles.promptActive}>interactive</span>
                 </div>
-                <div className={styles.commandChips} role="toolbar" aria-label="Terminal quick commands">
+                {!isTerminalOpen && terminalLogs.length > 0 && (
                   <button
                     type="button"
-                    className={styles.chip}
-                    onClick={() => executeCommand("help")}
-                    title="View all commands"
+                    className={styles.reopenTerminalBtn}
+                    onClick={() => setIsTerminalOpen(true)}
+                    title="Reopen terminal output window"
                   >
-                    help
+                    <span className={styles.statusDot} aria-hidden="true"></span>
+                    <span>view output ({terminalLogs.length}) &#8599;</span>
                   </button>
-                  <button
-                    type="button"
-                    className={styles.chip}
-                    onClick={() => executeCommand("apps")}
-                    title="List studio apps"
-                  >
-                    apps
-                  </button>
-                  <button
-                    type="button"
-                    className={styles.chip}
-                    onClick={() => executeCommand("moxie")}
-                    title="Moxie Docs details"
-                  >
-                    moxie
-                  </button>
-                  <button
-                    type="button"
-                    className={styles.chip}
-                    onClick={() => executeCommand("allmcps")}
-                    title="AllMCPs directory details"
-                  >
-                    allmcps
-                  </button>
-                  <button
-                    type="button"
-                    className={styles.chip}
-                    onClick={() => executeCommand("resumeskip")}
-                    title="ResumeSkip details"
-                  >
-                    resumeskip
-                  </button>
-                  <button
-                    type="button"
-                    className={styles.chip}
-                    onClick={() => executeCommand("status")}
-                    title="System status diagnostic"
-                  >
-                    status
-                  </button>
-                  <button
-                    type="button"
-                    className={styles.chip}
-                    onClick={() => executeCommand("stack")}
-                    title="Technology stack"
-                  >
-                    stack
-                  </button>
-                  <button
-                    type="button"
-                    className={styles.chip}
-                    onClick={() => executeCommand("specimen")}
-                    title="3D Jackalope telemetry & spin pulse"
-                  >
-                    spin 3D
-                  </button>
-                  <button
-                    type="button"
-                    className={styles.chip}
-                    onClick={() => executeCommand("contact")}
-                    title="Copy email & contact channels"
-                  >
-                    contact
-                  </button>
-                </div>
+                )}
               </div>
 
               {/* Interactive CLI Input Form */}
@@ -1011,37 +1030,6 @@ export default function Home() {
                   run &#8629;
                 </button>
               </form>
-
-              {/* Terminal Logs Output Feed */}
-              {terminalLogs.length > 0 && (
-                <div className={styles.terminalConsole} ref={terminalLogRef}>
-                  <div className={styles.terminalConsoleHead}>
-                    <span className={styles.terminalTitleBar}>
-                      <span className={styles.statusDot}></span> TERMINAL OUTPUT ({terminalLogs.length})
-                    </span>
-                    <button
-                      type="button"
-                      className={styles.clearBtn}
-                      onClick={() => setTerminalLogs([])}
-                      title="Clear terminal output"
-                    >
-                      clear
-                    </button>
-                  </div>
-                  <div className={styles.terminalLogList}>
-                    {terminalLogs.map((log) => (
-                      <div key={log.id} className={styles.terminalLogEntry}>
-                        <div className={styles.logPromptLine}>
-                          <span className={styles.logTimestamp}>[{log.timestamp}]</span>
-                          <span className={styles.logUser}>guest@jackalope:~$</span>
-                          <span className={styles.logCmd}>{log.command}</span>
-                        </div>
-                        <div className={styles.logOutputBody}>{log.output}</div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
 
               <h1 id="title">Jackalope Digital</h1>
 
