@@ -53,6 +53,19 @@ export default function Home() {
           "@id": "https://jackalope.digital/#organization",
         },
       },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://resumeskip.com/#software",
+        "name": "ResumeSkip",
+        "url": "https://resumeskip.com",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "description":
+          "Tailors the resume you already have to any job posting: ATS-readable output, an application tracker, without inventing experience.",
+        "publisher": {
+          "@id": "https://jackalope.digital/#organization",
+        },
+      },
     ],
   };
 
@@ -479,71 +492,102 @@ export default function Home() {
                 Featured Products
               </h2>
 
-              <div className={styles.flagshipContainer}>
+              <div className={styles.productRows}>
                 <a
-                  className={styles.flagshipCard}
+                  className={styles.productRow}
                   href="https://moxiedocs.com"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <div className={styles.flagshipHeader}>
-                    <span className={styles.flagshipBadge}>FLAGSHIP PRODUCT</span>
-                    <span className={styles.productLogo} aria-hidden="true">
-                      <Image src="/moxie-fox.svg" alt="" width={44} height={44} />
-                    </span>
-                  </div>
+                  <span className={styles.productLogo} aria-hidden="true">
+                    <Image src="/moxie-fox.svg" alt="" width={36} height={36} />
+                  </span>
 
-                  <div className={styles.productBody}>
-                    <span className={styles.productName}>Moxie Docs</span>
+                  <div className={styles.productRowBody}>
+                    <div className={styles.productRowHead}>
+                      <span className={styles.productName}>Moxie Docs</span>
+                      <span className={styles.flagshipBadge}>FLAGSHIP PRODUCT</span>
+                    </div>
                     <span className={styles.productDesc}>
                       Living documentation for private GitHub repos. Generates searchable
                       docs, checks PRs for alignment, and surfaces gaps before merge.
                     </span>
-
                     <div className={styles.tagGrid}>
                       <span className={styles.tag}>Living Docs</span>
                       <span className={styles.tag}>PR Alignment</span>
                       <span className={styles.tag}>Private GitHub Repos</span>
                       <span className={styles.tag}>Automated Insights</span>
                     </div>
-
-                    <span className={styles.productLink}>
-                      moxiedocs.com <span className={styles.arrow} aria-hidden="true">&#8599;</span>
-                    </span>
                   </div>
+
+                  <span className={styles.productLink}>
+                    moxiedocs.com <span className={styles.arrow} aria-hidden="true">&#8599;</span>
+                  </span>
                 </a>
 
                 <a
-                  className={styles.flagshipCard}
+                  className={styles.productRow}
                   href="https://allmcps.com"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <div className={styles.flagshipHeader}>
-                    <span className={styles.flagshipBadge}>PRODUCT</span>
-                    <span className={styles.productLogo} aria-hidden="true">
-                      <Image src="/allmcps-icon.svg" alt="" width={44} height={44} />
-                    </span>
-                  </div>
+                  <span className={styles.productLogo} aria-hidden="true">
+                    <Image src="/allmcps-icon.svg" alt="" width={36} height={36} />
+                  </span>
 
-                  <div className={styles.productBody}>
-                    <span className={styles.productName}>AllMCPs</span>
+                  <div className={styles.productRowBody}>
+                    <div className={styles.productRowHead}>
+                      <span className={styles.productName}>AllMCPs</span>
+                      <span className={styles.flagshipBadge}>PRODUCT</span>
+                    </div>
                     <span className={styles.productDesc}>
                       The definitive directory for discovering and installing Model Context
                       Protocol servers, so AI agents can find the right tools fast.
                     </span>
-
                     <div className={styles.tagGrid}>
                       <span className={styles.tag}>MCP Directory</span>
                       <span className={styles.tag}>Server Discovery</span>
                       <span className={styles.tag}>One-Click Install</span>
                       <span className={styles.tag}>Agent Tooling</span>
                     </div>
-
-                    <span className={styles.productLink}>
-                      allmcps.com <span className={styles.arrow} aria-hidden="true">&#8599;</span>
-                    </span>
                   </div>
+
+                  <span className={styles.productLink}>
+                    allmcps.com <span className={styles.arrow} aria-hidden="true">&#8599;</span>
+                  </span>
+                </a>
+
+                <a
+                  className={styles.productRow}
+                  href="https://resumeskip.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span className={styles.productLogo} aria-hidden="true">
+                    <Image src="/resumeskip-icon.svg" alt="" width={36} height={36} />
+                  </span>
+
+                  <div className={styles.productRowBody}>
+                    <div className={styles.productRowHead}>
+                      <span className={styles.productName}>ResumeSkip</span>
+                      <span className={styles.flagshipBadge}>PRODUCT</span>
+                    </div>
+                    <span className={styles.productDesc}>
+                      Tailors the resume you already have to any job posting. Rephrases and
+                      reorders real experience into ATS-readable output, without inventing
+                      what you didn&apos;t do.
+                    </span>
+                    <div className={styles.tagGrid}>
+                      <span className={styles.tag}>ATS Tailoring</span>
+                      <span className={styles.tag}>Cover Letters</span>
+                      <span className={styles.tag}>Application Tracker</span>
+                      <span className={styles.tag}>Job Listings</span>
+                    </div>
+                  </div>
+
+                  <span className={styles.productLink}>
+                    resumeskip.com <span className={styles.arrow} aria-hidden="true">&#8599;</span>
+                  </span>
                 </a>
               </div>
             </section>
