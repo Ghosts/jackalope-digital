@@ -4,23 +4,29 @@ import styles from "./SiteFooter.module.css";
 export default function SiteFooter() {
   return (
     <footer className={styles.footer}>
-      <p className={styles.prompt}>
-        <span>guest@jackalope</span>:~$ cat LICENSE
-      </p>
-      <div className={styles.row}>
+      <div className={styles.container}>
         <p className={styles.copyright}>
-          &copy; {new Date().getFullYear()} Jackalope Digital LLC. All rights reserved.
+          &copy; {new Date().getFullYear()} Jackalope Digital LLC
         </p>
+
         <nav className={styles.nav} aria-label="Footer Navigation">
-          <a href="https://moxiedocs.com" target="_blank" rel="noopener noreferrer">
-            Moxie Docs <span className={styles.arrow} aria-hidden="true">&#8599;</span>
+          <a
+            href="https://github.com/Jackalope-Dev"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.footerLink}
+          >
+            GitHub
           </a>
-          <a href="https://github.com/Jackalope-Dev" target="_blank" rel="noopener noreferrer">
-            GitHub <span className={styles.arrow} aria-hidden="true">&#8599;</span>
+          <Link href="/privacy" className={styles.footerLink}>
+            Privacy
+          </Link>
+          <Link href="/terms" className={styles.footerLink}>
+            Terms
+          </Link>
+          <a href="mailto:contact@jackalope.digital" className={styles.footerLink}>
+            Contact
           </a>
-          <Link href="/privacy">Privacy</Link>
-          <Link href="/terms">Terms</Link>
-          <a href="mailto:contact@jackalope.digital">Contact</a>
         </nav>
       </div>
     </footer>

@@ -1,63 +1,36 @@
 .footer {
-  position: relative;
-  z-index: 1;
-  width: min(100%, 60rem);
-  margin: 0 auto;
-  padding: clamp(1.5rem, 4vw, 2.5rem) clamp(1rem, 4vw, 3rem) clamp(2.5rem, 5vw, 3.5rem);
-  border-top: 1px solid var(--line);
+  width: 100%;
+  margin-top: 1rem;
+  padding: 2.5rem 0 1rem;
+  border-top: 1px solid var(--border-subtle);
 }
 
-.prompt {
-  margin: 0 0 1rem;
-  color: var(--dim);
-  font-size: 0.82rem;
-  font-weight: 650;
-}
-
-.prompt span {
-  color: var(--cyan);
-}
-
-.row {
+.container {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 1.2rem;
+  gap: 1.25rem;
 }
 
 .copyright {
-  margin: 0;
-  color: var(--dim);
-  font-size: 0.78rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
 }
 
 .nav {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 1.2rem;
+  gap: 1.5rem;
 }
 
-.nav a {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-  color: var(--soft);
-  font-size: 0.78rem;
-  line-height: 1;
+.footerLink {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
   transition: color 0.2s ease;
 }
 
-.nav a:hover,
-.nav a:focus-visible {
-  color: var(--lavender);
-  outline: none;
-}
-
-.arrow {
-  display: inline-block;
-  font-size: 0.85em;
-  line-height: 1;
-  opacity: 0.85;
+.footerLink:hover {
+  color: var(--text-primary);
 }

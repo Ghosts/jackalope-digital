@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const viewport: Viewport = {
-  themeColor: "#0d0c0b",
+  themeColor: "#09090b",
 };
 
 export const metadata: Metadata = {
@@ -12,15 +12,14 @@ export const metadata: Metadata = {
     template: "%s | Jackalope Digital",
   },
   description:
-    "Jackalope Digital is an independent software studio building developer tools, documentation systems, and digital services.",
+    "Jackalope Digital builds software, tools, and services.",
   applicationName: "Jackalope Digital",
   keywords: [
     "Jackalope Digital",
     "jackalope.digital",
     "Moxie Docs",
-    "software studio",
     "developer tools",
-    "documentation automation",
+    "software",
   ],
   manifest: "/site.webmanifest",
   icons: {
@@ -38,7 +37,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Jackalope Digital | Software, Tools & Services",
     description:
-      "Independent software studio building developer tools, documentation systems, and digital services.",
+      "Jackalope Digital builds software, tools, and services.",
     url: "/",
     siteName: "Jackalope Digital",
     images: [
@@ -59,7 +58,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Jackalope Digital | Software, Tools & Services",
     description:
-      "Independent software studio building developer tools, documentation systems, and digital services.",
+      "Jackalope Digital builds software, tools, and services.",
     images: ["/og-image.png"],
   },
 };

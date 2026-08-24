@@ -16,11 +16,8 @@ export default function TermsPage() {
     <div className={styles.legalWrapper}>
       <main className={styles.legal}>
         <Link className={styles.back} href="/">
-          &#8592; back to jackalope.digital
+          &#8592; Back to Home
         </Link>
-        <p className={styles.prompt}>
-          <span>guest@jackalope</span>:~$ cat TERMS
-        </p>
         <h1>Terms of Service</h1>
         <p className={styles.updated}>Last updated: May 26, 2026</p>
 
@@ -88,7 +85,9 @@ export default function TermsPage() {
         </p>
       </main>
 
-      <SiteFooter />
+      <div style={{ width: "min(100% - 2.5rem, 44rem)", margin: "0 auto" }}>
+        <SiteFooter />
+      </div>
     </div>
   );
 }
