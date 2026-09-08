@@ -4,12 +4,22 @@
   "description": "Jackalope Digital builds software, tools, and services.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0d0c0b",
-  "theme_color": "#0d0c0b",
+  "background_color": "#08080a",
+  "theme_color": "#08080a",
   "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
     {
       "src": "/icon.png",
       "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
       "type": "image/png"
     }
   ]

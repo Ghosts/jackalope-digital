@@ -1,8 +1,15 @@
 import type { Metadata, Viewport } from "next";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-jakarta",
+});
+
 export const viewport: Viewport = {
-  themeColor: "#09090b",
+  themeColor: "#08080a",
 };
 
 export const metadata: Metadata = {
@@ -12,11 +19,14 @@ export const metadata: Metadata = {
     template: "%s | Jackalope Digital",
   },
   description:
-    "Jackalope Digital builds software, tools, and services.",
+    "Jackalope Digital builds software, tools, and services — including Jackalope, a desktop workspace for coding agents.",
   applicationName: "Jackalope Digital",
   keywords: [
     "Jackalope Digital",
     "jackalope.digital",
+    "Jackalope",
+    "jackalope.dev",
+    "coding agents",
     "Moxie Docs",
     "developer tools",
     "software",
@@ -24,12 +34,11 @@ export const metadata: Metadata = {
   manifest: "/site.webmanifest",
   icons: {
     icon: [
-      {
-        url: "/icon.png",
-        sizes: "512x512",
-        type: "image/png",
-      },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/icon.png", sizes: "512x512", type: "image/png" },
     ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
   },
   alternates: {
     canonical: "/",
@@ -37,7 +46,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Jackalope Digital | Software, Tools & Services",
     description:
-      "Jackalope Digital builds software, tools, and services.",
+      "Jackalope Digital builds software, tools, and services — including Jackalope, a desktop workspace for coding agents.",
     url: "/",
     siteName: "Jackalope Digital",
     images: [
@@ -58,7 +67,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Jackalope Digital | Software, Tools & Services",
     description:
-      "Jackalope Digital builds software, tools, and services.",
+      "Jackalope Digital builds software, tools, and services — including Jackalope, a desktop workspace for coding agents.",
     images: ["/og-image.png"],
   },
 };
@@ -69,7 +78,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={jakarta.variable}>
       <body>{children}</body>
     </html>
   );
