@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+import { ThemeToggle, themeInitScript } from "./ThemeToggle";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -9,7 +10,10 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#08080a",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#faf9fc" },
+    { media: "(prefers-color-scheme: dark)", color: "#08080a" },
+  ],
 };
 
 export const metadata: Metadata = {
@@ -78,8 +82,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={jakarta.variable}>
-      <body>{children}</body>
+    <html lang="en" className={jakarta.variable} suppressHydrationWarning>
+      <head>
+        <script
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: themeInitScript }}
+        />
+      </head>
+      <body>
+        <ThemeToggle />
+        {children}
+      </body>
     </html>
   );
 }

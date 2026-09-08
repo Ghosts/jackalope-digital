@@ -38,7 +38,7 @@
   width: 3.1rem;
   height: 3.4rem;
   color: var(--accent);
-  filter: drop-shadow(0 4px 18px rgba(185, 166, 242, 0.35));
+  filter: var(--mark-glow);
 }
 
 .title {
@@ -65,7 +65,7 @@
   padding: 1.6rem 1.7rem;
   background:
     linear-gradient(180deg, var(--accent-faint), transparent 60%),
-    rgba(16, 16, 21, 0.72);
+    var(--surface-card);
   border: 1px solid var(--border-strong);
   border-radius: 18px;
   box-shadow: var(--shadow-pop);
@@ -79,9 +79,7 @@
 .feature:hover {
   transform: translateY(-3px);
   border-color: var(--accent);
-  box-shadow:
-    0 22px 60px rgba(0, 0, 0, 0.6),
-    0 0 0 1px var(--accent-line);
+  box-shadow: var(--shadow-hover);
 }
 
 .featureMark {
@@ -145,7 +143,7 @@
   justify-content: space-between;
   gap: 1.25rem;
   padding: 1rem 1.35rem;
-  background: rgba(16, 16, 21, 0.6);
+  background: var(--surface-card-solid);
   border: 1px solid var(--border-subtle);
   border-radius: 13px;
   transition:
@@ -155,7 +153,7 @@
 }
 
 .productItem:hover {
-  background: rgba(22, 22, 29, 0.85);
+  background: var(--surface-card-hover);
   border-color: var(--border-strong);
   transform: translateY(-2px);
 }

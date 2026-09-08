@@ -1,17 +1,138 @@
+/*
+ * Theme tokens.
+ * Bare :root holds the LIGHT palette. The dark palette is defined twice:
+ *   - under prefers-color-scheme: dark, unless the user forced light
+ *   - under [data-theme="dark"], so the switcher wins in both directions
+ */
 :root {
-  /* Black canvas */
+  /* Light canvas */
+  --bg-pure: #faf9fc;
+  --bg-surface: #ffffff;
+  --bg-surface-raised: #ffffff;
+  --bg-surface-inset: #f3f1f8;
+
+  /* Text & foreground */
+  --text-primary: #16141d;
+  --text-secondary: #55516a;
+  --text-tertiary: #837e97;
+  --text-muted: #9d99ad;
+
+  /* Lavender accent (darkened for contrast on light) */
+  --accent: #6d4fd8;
+  --accent-bright: #5a3cc9;
+  --accent-dim: rgba(109, 79, 216, 0.14);
+  --accent-faint: rgba(109, 79, 216, 0.06);
+  --accent-line: rgba(109, 79, 216, 0.28);
+  --on-accent: #ffffff;
+
+  /* Borders & hairlines */
+  --border-subtle: rgba(20, 16, 40, 0.09);
+  --border-medium: rgba(20, 16, 40, 0.16);
+  --border-strong: rgba(109, 79, 216, 0.32);
+
+  /* Layered card surfaces (semi-transparent over the canvas) */
+  --surface-card: rgba(255, 255, 255, 0.78);
+  --surface-card-solid: rgba(255, 255, 255, 0.7);
+  --surface-card-hover: rgba(255, 255, 255, 0.95);
+
+  /* Ambient background glows */
+  --body-glow-1: radial-gradient(
+    ellipse 70% 45% at 50% -10%,
+    rgba(109, 79, 216, 0.1),
+    transparent 70%
+  );
+  --body-glow-2: radial-gradient(
+    ellipse 50% 40% at 85% 90%,
+    rgba(109, 79, 216, 0.06),
+    transparent 65%
+  );
+
+  --shadow-surface:
+    0 4px 24px rgba(20, 14, 40, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  --shadow-pop:
+    0 16px 50px rgba(20, 14, 40, 0.12),
+    0 0 0 1px var(--border-subtle);
+  --shadow-hover:
+    0 22px 60px rgba(20, 14, 40, 0.16),
+    0 0 0 1px var(--accent-line);
+
+  --mark-glow: drop-shadow(0 4px 18px rgba(109, 79, 216, 0.28));
+  --echo-opacity: 0.5;
+
+  --font-sans: var(--font-jakarta), -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  color-scheme: light dark;
+}
+
+/* Dark palette */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg-pure: #08080a;
+    --bg-surface: #101015;
+    --bg-surface-raised: #16161d;
+    --bg-surface-inset: #0b0b0e;
+
+    --text-primary: #f5f4f8;
+    --text-secondary: #a6a2b8;
+    --text-tertiary: #7c7891;
+    --text-muted: #56536a;
+
+    --accent: #b9a6f2;
+    --accent-bright: #cebef8;
+    --accent-dim: rgba(185, 166, 242, 0.16);
+    --accent-faint: rgba(185, 166, 242, 0.08);
+    --accent-line: rgba(185, 166, 242, 0.22);
+    --on-accent: #0a0812;
+
+    --border-subtle: rgba(255, 255, 255, 0.07);
+    --border-medium: rgba(255, 255, 255, 0.13);
+    --border-strong: rgba(185, 166, 242, 0.32);
+
+    --surface-card: rgba(16, 16, 21, 0.72);
+    --surface-card-solid: rgba(16, 16, 21, 0.6);
+    --surface-card-hover: rgba(22, 22, 29, 0.85);
+
+    --body-glow-1: radial-gradient(
+      ellipse 70% 45% at 50% -10%,
+      rgba(185, 166, 242, 0.1),
+      transparent 70%
+    );
+    --body-glow-2: radial-gradient(
+      ellipse 50% 40% at 85% 90%,
+      rgba(185, 166, 242, 0.05),
+      transparent 65%
+    );
+
+    --shadow-surface:
+      0 4px 24px rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    --shadow-pop:
+      0 16px 50px rgba(0, 0, 0, 0.6),
+      0 0 0 1px var(--border-subtle);
+    --shadow-hover:
+      0 22px 60px rgba(0, 0, 0, 0.6),
+      0 0 0 1px var(--accent-line);
+
+    --mark-glow: drop-shadow(0 4px 18px rgba(185, 166, 242, 0.35));
+    --echo-opacity: 0.4;
+
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
   --bg-pure: #08080a;
   --bg-surface: #101015;
   --bg-surface-raised: #16161d;
   --bg-surface-inset: #0b0b0e;
 
-  /* Text & foreground */
   --text-primary: #f5f4f8;
   --text-secondary: #a6a2b8;
   --text-tertiary: #7c7891;
   --text-muted: #56536a;
 
-  /* Lavender accent */
   --accent: #b9a6f2;
   --accent-bright: #cebef8;
   --accent-dim: rgba(185, 166, 242, 0.16);
@@ -19,10 +140,24 @@
   --accent-line: rgba(185, 166, 242, 0.22);
   --on-accent: #0a0812;
 
-  /* Borders & hairlines */
   --border-subtle: rgba(255, 255, 255, 0.07);
   --border-medium: rgba(255, 255, 255, 0.13);
   --border-strong: rgba(185, 166, 242, 0.32);
+
+  --surface-card: rgba(16, 16, 21, 0.72);
+  --surface-card-solid: rgba(16, 16, 21, 0.6);
+  --surface-card-hover: rgba(22, 22, 29, 0.85);
+
+  --body-glow-1: radial-gradient(
+    ellipse 70% 45% at 50% -10%,
+    rgba(185, 166, 242, 0.1),
+    transparent 70%
+  );
+  --body-glow-2: radial-gradient(
+    ellipse 50% 40% at 85% 90%,
+    rgba(185, 166, 242, 0.05),
+    transparent 65%
+  );
 
   --shadow-surface:
     0 4px 24px rgba(0, 0, 0, 0.5),
@@ -30,9 +165,18 @@
   --shadow-pop:
     0 16px 50px rgba(0, 0, 0, 0.6),
     0 0 0 1px var(--border-subtle);
+  --shadow-hover:
+    0 22px 60px rgba(0, 0, 0, 0.6),
+    0 0 0 1px var(--accent-line);
 
-  --font-sans: var(--font-jakarta), -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mark-glow: drop-shadow(0 4px 18px rgba(185, 166, 242, 0.35));
+  --echo-opacity: 0.4;
+
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
 }
 
 * {
@@ -45,7 +189,6 @@ html {
   width: 100%;
   min-height: 100%;
   background: var(--bg-pure);
-  color-scheme: dark;
   scroll-behavior: smooth;
   font-size: 16px;
 }
@@ -56,15 +199,14 @@ body {
   min-width: 320px;
   color: var(--text-primary);
   background-color: var(--bg-pure);
-  background-image:
-    radial-gradient(ellipse 70% 45% at 50% -10%, rgba(185, 166, 242, 0.1), transparent 70%),
-    radial-gradient(ellipse 50% 40% at 85% 90%, rgba(185, 166, 242, 0.05), transparent 65%);
+  background-image: var(--body-glow-1), var(--body-glow-2);
   background-attachment: fixed;
   font-family: var(--font-sans);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.5;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 a {
