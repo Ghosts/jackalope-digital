@@ -49,6 +49,13 @@ const jsonLd = {
       url: "https://resumeskip.com",
       description: "ATS-tailored resumes and application tracker.",
     },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://lopebase.com/#software",
+      name: "LopeBase",
+      url: "https://lopebase.com",
+      description: "One ops console for every SaaS product you run.",
+    },
   ],
 };
 
@@ -67,6 +74,11 @@ const products = [
     name: "ResumeSkip",
     href: "https://resumeskip.com",
     desc: "ATS resume tailor & tracker",
+  },
+  {
+    name: "LopeBase",
+    href: "https://lopebase.com",
+    desc: "Ops console for every SaaS product you run",
   },
 ];
 

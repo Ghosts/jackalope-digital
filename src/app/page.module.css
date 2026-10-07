@@ -50,9 +50,12 @@
 
 .subtitle {
   font-size: clamp(0.68rem, 2.6vw, 0.82rem);
-  font-weight: 500;
-  color: var(--text-tertiary);
+  font-weight: 600;
+  color: var(--text-secondary);
   letter-spacing: 0.2em;
+  text-shadow:
+    0 0 6px var(--bg-pure),
+    0 0 12px var(--bg-pure);
   text-transform: uppercase;
 }
 
