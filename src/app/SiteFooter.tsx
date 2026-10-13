@@ -5,9 +5,7 @@ export default function SiteFooter() {
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
-        <p className={styles.copyright}>
-          &copy; {new Date().getFullYear()} Jackalope Digital LLC
-        </p>
+        <p className={styles.copyright}>&copy; {new Date().getFullYear()} Jackalope Digital LLC</p>
 
         <nav className={styles.nav} aria-label="Footer Navigation">
           <a

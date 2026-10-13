@@ -1,0 +1,39 @@
+# Jackalope Digital lefthook baseline. Docs: https://lefthook.dev
+# Install with a `"prepare": "lefthook install"` script.
+# pre-commit touches only STAGED files so commits stay fast and never reformat the
+# whole tree (which collides with parallel sessions). pre-push runs the full
+# `verify` gate (typecheck + lint + test + knip) plus a secret scan.
+# Pick the biome OR the eslint+prettier block, not both.
+
+pre-commit:
+  parallel: true
+  commands:
+    # --- Biome repos (default) ---
+    biome:
+      glob: "*.{js,mjs,ts,mts,jsx,tsx,json,jsonc,css}"
+      run: node node_modules/@biomejs/biome/bin/biome check --write --diagnostic-level=error --no-errors-on-unmatched --staged {staged_files}
+      stage_fixed: true
+
+    # --- ESLint + Prettier repos (uncomment, remove biome above) ---
+    # prettier:
+    #   glob: "*.{js,jsx,ts,tsx,mjs,cjs,json,css,md,html}"
+    #   run: bunx prettier --write --ignore-unknown {staged_files}
+    #   stage_fixed: true
+    # eslint:
+    #   glob: "*.{js,jsx,ts,tsx,mjs,cjs}"
+    #   run: bunx eslint --fix {staged_files}
+    #   stage_fixed: true
+
+pre-push:
+  parallel: true
+  commands:
+    verify:
+      run: bun run verify
+    secrets:
+      run: |
+        if ! command -v gitleaks >/dev/null 2>&1; then echo "gitleaks not installed, skipping (brew install gitleaks)"; exit 0; fi
+        base=$(git rev-parse '@{u}' 2>/dev/null || git rev-parse HEAD~1)
+        gitleaks git --redact --no-banner --log-opts="$base..HEAD" .
+    # Add repo-specific pre-push gates here, e.g.:
+    # codegen-drift:
+    #   run: bun run check:codegen

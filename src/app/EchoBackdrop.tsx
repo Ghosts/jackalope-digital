@@ -10,7 +10,7 @@ export function EchoBackdrop() {
   return (
     <div className={styles.backdrop} aria-hidden="true">
       <div className={styles.stage}>
-        <svg className={styles.svg} viewBox="34 -6 118 132" fill="none">
+        <svg className={styles.svg} viewBox="34 -6 118 132" fill="none" aria-hidden="true">
           {ECHOES.map((echo) => (
             <path
               key={echo}
