@@ -3,9 +3,7 @@
   "main": ".open-next/worker.js",
   "name": "jackalope-digital",
   "compatibility_date": "2026-05-24",
-  "compatibility_flags": [
-    "nodejs_compat"
-  ],
+  "compatibility_flags": ["nodejs_compat"],
   "routes": [
     { "pattern": "jackalope.digital", "custom_domain": true },
     { "pattern": "www.jackalope.digital", "custom_domain": true }

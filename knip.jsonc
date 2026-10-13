@@ -1,0 +1,6 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema-jsonc.json",
+  // open-next.config.ts is read by the OpenNext CLI.
+  "entry": ["open-next.config.ts"],
+  "project": ["src/**/*.{ts,tsx}", "*.ts"]
+}

@@ -85,7 +85,7 @@ export default function RootLayout({
     <html lang="en" className={jakarta.variable} suppressHydrationWarning>
       <head>
         <script
-          // eslint-disable-next-line react/no-danger
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: static theme script, sets data-theme before paint
           dangerouslySetInnerHTML={{ __html: themeInitScript }}
         />
       </head>

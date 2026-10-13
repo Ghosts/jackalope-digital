@@ -99,7 +99,7 @@ export default function Home() {
     <div className={styles.page}>
       <script
         type="application/ld+json"
-        // eslint-disable-next-line react/no-danger
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD built from constants
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
@@ -123,8 +123,8 @@ export default function Home() {
             <span className={styles.featureTag}>New · Desktop app</span>
             <span className={styles.featureName}>Jackalope &#8599;</span>
             <span className={styles.featureDesc}>
-              A calm desktop workspace to run coding agents in parallel, keep
-              project context, and review every change.
+              A calm desktop workspace to run coding agents in parallel, keep project context, and
+              review every change.
             </span>
             <span className={styles.featureLink}>jackalope.dev</span>
           </div>
@@ -147,11 +147,7 @@ export default function Home() {
       </main>
 
       <footer className={styles.footer}>
-        <button
-          type="button"
-          onClick={handleCopyEmail}
-          className={styles.emailBtn}
-        >
+        <button type="button" onClick={handleCopyEmail} className={styles.emailBtn}>
           contact@jackalope.digital
         </button>
         <a
