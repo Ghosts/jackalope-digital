@@ -1,29 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<p align="center">
+  <a href="https://jackalope.digital">
+    <img src="public/icon.png" alt="Jackalope Digital logo" width="120" height="120">
+  </a>
+</p>
 
-## Getting Started
+<h1 align="center">Jackalope Digital</h1>
+
+<p align="center">
+  Software, tools, and services.<br>
+  <a href="https://jackalope.digital">jackalope.digital</a>
+</p>
+
+---
+
+This is the source for [jackalope.digital](https://jackalope.digital), the studio site for
+Jackalope Digital LLC. It is a small Next.js app that runs on Cloudflare Workers.
+
+## What we make
+
+| Product | What it does |
+| --- | --- |
+| [Jackalope](https://jackalope.dev) | Desktop workspace to run coding agents in parallel, keep project context, and review every change |
+| [Moxie Docs](https://moxiedocs.com) | Living documentation for private GitHub repos |
+| [AllMCPs](https://allmcps.com) | Model Context Protocol server directory |
+| [ResumeSkip](https://resumeskip.com) | ATS resume tailor and application tracker |
+| [LopeBase](https://lopebase.com) | Ops console for every SaaS product you run |
+
+## Stack
+
+- [Next.js](https://nextjs.org) App Router with React and TypeScript
+- CSS Modules for styling, with a light, dark, and system theme toggle
+- Deployed to [Cloudflare Workers](https://workers.cloudflare.com) through
+  [OpenNext](https://opennext.js.org/cloudflare)
+- [Bun](https://bun.sh) for packages and scripts, [Biome](https://biomejs.dev) for linting and
+  formatting, [Knip](https://knip.dev) for dead code
+
+## Running locally
+
+You need Bun and the Node version in `.nvmrc`.
 
 ```bash
 bun install
 bun run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Command | Purpose |
+| --- | --- |
+| `bun run verify` | Typecheck, lint, and dead code check |
+| `bun run build` | Production Next.js build |
+| `bun run preview` | Build for Workers and serve it locally with Wrangler |
+| `bun run deploy` | Build and deploy to Cloudflare |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Project layout
 
-## Learn More
+```
+src/app/          Pages, layout, sitemap and robots routes
+  privacy/        Privacy policy
+  terms/          Terms of service
+public/           Logo, icons, and static assets
+wrangler.jsonc    Cloudflare Worker config
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Contributions
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+This code is public so anyone can read it. We are not accepting pull requests or issues.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Contact
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Questions or ideas: [contact@jackalope.digital](mailto:contact@jackalope.digital)
