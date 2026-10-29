@@ -33,3 +33,31 @@
   width: 1.15rem;
   height: 1.15rem;
 }
+
+.toDark,
+.toLight {
+  display: inline-flex;
+}
+
+/* Light by default: offer dark. Mirrors the theme rules in globals.css. */
+.toLight {
+  display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  :global(:root:not([data-theme="light"])) .toDark {
+    display: none;
+  }
+
+  :global(:root:not([data-theme="light"])) .toLight {
+    display: inline-flex;
+  }
+}
+
+:global(:root[data-theme="dark"]) .toDark {
+  display: none;
+}
+
+:global(:root[data-theme="dark"]) .toLight {
+  display: inline-flex;
+}

@@ -34,3 +34,9 @@
 .footerLink:hover {
   color: var(--text-primary);
 }
+
+.iconLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+}

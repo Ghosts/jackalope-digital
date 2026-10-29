@@ -1,40 +1,19 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import styles from "./ThemeToggle.module.css";
 
-type Theme = "system" | "light" | "dark";
+type Theme = "light" | "dark";
 
-const ORDER: Theme[] = ["system", "light", "dark"];
 const STORAGE_KEY = "theme";
 
 // Inline in <head> so the theme is set before first paint (no flash).
 export const themeInitScript = `!function(){try{var t=localStorage.getItem("${STORAGE_KEY}");("light"===t||"dark"===t)&&document.documentElement.setAttribute("data-theme",t)}catch(e){}}()`;
 
-function applyTheme(theme: Theme) {
-  const root = document.documentElement;
-  if (theme === "system") {
-    root.removeAttribute("data-theme");
-  } else {
-    root.setAttribute("data-theme", theme);
-  }
-}
-
-function SystemIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.7"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <rect x="2" y="3" width="20" height="14" rx="2" />
-      <path d="M8 21h8M12 17v4" />
-    </svg>
-  );
+// The device preference applies until the visitor picks a theme; after that their pick sticks.
+function currentTheme(): Theme {
+  const chosen = document.documentElement.getAttribute("data-theme");
+  if (chosen === "light" || chosen === "dark") return chosen;
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }
 
 function SunIcon() {
@@ -70,52 +49,32 @@ function MoonIcon() {
   );
 }
 
-const LABELS: Record<Theme, string> = {
-  system: "System",
-  light: "Light",
-  dark: "Dark",
-};
-
 export function ThemeToggle() {
-  const [theme, setTheme] = useState<Theme>("system");
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
+  const toggle = () => {
+    const next: Theme = currentTheme() === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", next);
     try {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored === "light" || stored === "dark") setTheme(stored);
+      localStorage.setItem(STORAGE_KEY, next);
     } catch {
       /* ignore */
     }
-  }, []);
-
-  const cycle = () => {
-    const next = ORDER[(ORDER.indexOf(theme) + 1) % ORDER.length];
-    setTheme(next);
-    try {
-      if (next === "system") localStorage.removeItem(STORAGE_KEY);
-      else localStorage.setItem(STORAGE_KEY, next);
-    } catch {
-      /* ignore */
-    }
-    applyTheme(next);
   };
 
-  const current = mounted ? theme : "system";
-  const label = `Theme: ${LABELS[current]} (click to change)`;
-
+  // Both icons render; CSS shows the one for the theme a click switches to.
   return (
     <button
       type="button"
-      onClick={cycle}
+      onClick={toggle}
       className={styles.toggle}
-      aria-label={label}
-      title={label}
+      aria-label="Switch between light and dark theme"
+      title="Switch between light and dark theme"
     >
-      {current === "system" && <SystemIcon />}
-      {current === "light" && <SunIcon />}
-      {current === "dark" && <MoonIcon />}
+      <span className={styles.toDark}>
+        <MoonIcon />
+      </span>
+      <span className={styles.toLight}>
+        <SunIcon />
+      </span>
     </button>
   );
 }

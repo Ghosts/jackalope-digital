@@ -1,16 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="ResumeSkip logo">
-  <rect width="512" height="512" rx="56" fill="#1C1612"/>
-  <rect x="168" y="92" width="228" height="304" rx="12" fill="#C9BBA6"/>
-  <rect x="132" y="116" width="228" height="304" rx="12" fill="#F6EFE4"/>
-  <!-- Resume Header lines -->
-  <rect x="164" y="152" width="124" height="12" rx="3" fill="#1C1612"/>
-  <rect x="164" y="178" width="88" height="8" rx="2" fill="#1C1612" opacity="0.42"/>
-  <rect x="164" y="196" width="112" height="8" rx="2" fill="#1C1612" opacity="0.42"/>
-  <!-- Integrated Skip / Play Symbol (⏭ / ⏩|) -->
-  <path d="M 164 238 Q 164 236 166 237 L 222 269 Q 225 272 222 275 L 166 307 Q 164 308 164 306 Z" fill="#1C1612"/>
-  <path d="M 230 238 Q 230 236 232 237 L 288 269 Q 291 272 288 275 L 232 307 Q 230 308 230 306 Z" fill="#C23B22"/>
-  <rect x="296" y="236" width="12" height="72" rx="4" fill="#C23B22"/>
-  <!-- Proof mark rule & resume lines below -->
-  <rect x="164" y="328" width="144" height="9" rx="2" fill="#C23B22"/>
-  <rect x="164" y="352" width="96" height="8" rx="2" fill="#1C1612" opacity="0.42"/>
+  <!-- Mark & Field icon / logo: flat stamp-red tile, white skip glyph with bold pencil bar -->
+  <rect x="28" y="28" width="456" height="456" rx="104" fill="#DC1F26"/>
+  <path d="M101 164 L207 256 L101 348 Z" fill="#FFFFFF"/>
+  <path d="M235 164 L341 256 L235 348 Z" fill="#FFFFFF"/>
+  <!-- Bold pencil glyph: rounded eraser, body, and sharpened tip -->
+  <path d="M 366 178 C 366 161 376 154 394 154 C 412 154 422 161 422 178 L 422 192 L 366 192 Z" fill="#FFFFFF"/>
+  <rect x="366" y="202" width="56" height="84" rx="4" fill="#FFFFFF"/>
+  <path d="M 366 296 L 422 296 L 394 358 Z" fill="#FFFFFF"/>
 </svg>
