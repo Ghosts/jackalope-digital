@@ -10,6 +10,8 @@ const ECHOES = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 export function EchoBackdrop() {
   return (
     <div className={styles.backdrop} aria-hidden="true">
+      {/* First so the echo logo paints over the noise. */}
+      <AsciiField />
       <div className={styles.stage}>
         <svg className={styles.svg} viewBox="34 -6 118 132" fill="none" aria-hidden="true">
           <defs>
@@ -46,7 +48,6 @@ export function EchoBackdrop() {
           <path d={headOutline} className={styles.core} />
         </svg>
       </div>
-      <AsciiField />
     </div>
   );
 }
