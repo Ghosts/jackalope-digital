@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     template: "%s | Jackalope Digital",
   },
   description:
-    "Jackalope Digital builds software, tools, and services — including Jackalope, a desktop workspace for coding agents.",
+    "Jackalope Digital builds software, tools, and services, including Jackalope, a desktop app and CLI for running coding agents in parallel.",
   applicationName: "Jackalope Digital",
   keywords: [
     "Jackalope Digital",
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Jackalope Digital | Software, Tools & Services",
     description:
-      "Jackalope Digital builds software, tools, and services — including Jackalope, a desktop workspace for coding agents.",
+      "Jackalope Digital builds software, tools, and services, including Jackalope, a desktop app and CLI for running coding agents in parallel.",
     url: "/",
     siteName: "Jackalope Digital",
     images: [
@@ -71,7 +71,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Jackalope Digital | Software, Tools & Services",
     description:
-      "Jackalope Digital builds software, tools, and services — including Jackalope, a desktop workspace for coding agents.",
+      "Jackalope Digital builds software, tools, and services, including Jackalope, a desktop app and CLI for running coding agents in parallel.",
     images: ["/og-image.png"],
   },
 };
