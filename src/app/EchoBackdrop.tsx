@@ -1,18 +1,14 @@
 import type { CSSProperties } from "react";
-import { AsciiField } from "./AsciiField";
 import { characterPaths, headOutline } from "./BrandMark";
 import styles from "./EchoBackdrop.module.css";
 
 const ECHOES = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-// Per-echo offset at full spread, matching the echo-fold keyframes.
-const SPREAD = { x: 1.5, y: 0.34 };
 
 // The "lines motif" — the Jackalope head fanned into layered strokes that
 // fold toward a single silhouette and back, echoing the desktop app brand.
 export function EchoBackdrop() {
   return (
     <div className={styles.backdrop} aria-hidden="true">
-      <AsciiField echoes={ECHOES.length} shift={SPREAD} />
       <div className={styles.stage}>
         <svg className={styles.svg} viewBox="34 -6 118 132" fill="none" aria-hidden="true">
           <defs>
