@@ -296,6 +296,12 @@
   color: var(--accent);
 }
 
+.iconLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+}
+
 .emailBtn {
   background: transparent;
   border: none;

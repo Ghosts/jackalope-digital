@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { GitHubIcon } from "./GitHubIcon";
 import styles from "./SiteFooter.module.css";
 
 export default function SiteFooter() {
@@ -12,8 +13,9 @@ export default function SiteFooter() {
             href="https://github.com/Jackalope-Dev"
             target="_blank"
             rel="noopener noreferrer"
-            className={styles.footerLink}
+            className={`${styles.footerLink} ${styles.iconLink}`}
           >
+            <GitHubIcon />
             GitHub
           </a>
           <Link href="/about" className={styles.footerLink}>

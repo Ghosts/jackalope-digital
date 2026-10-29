@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useCallback, useRef, useState } from "react";
 import { BrandMark } from "./BrandMark";
 import { EchoBackdrop } from "./EchoBackdrop";
+import { GitHubIcon } from "./GitHubIcon";
 import styles from "./page.module.css";
 
 const jsonLd = {
@@ -99,7 +100,7 @@ const products: Product[] = [
   {
     name: "ResumeSkip",
     href: "https://resumeskip.com",
-    desc: "ATS resume tailor & tracker",
+    desc: "ATS resume tailor, tracker & browser extension",
     details:
       "Tailor your resume to each job's ATS keywords and track every application in one place. Extensions for Chrome and Firefox work right from the job listing.",
     logo: "/resumeskip-icon.svg",
@@ -196,8 +197,9 @@ export default function Home() {
           href="https://github.com/Jackalope-Dev"
           target="_blank"
           rel="noopener noreferrer"
-          className={styles.footerLink}
+          className={`${styles.footerLink} ${styles.iconLink}`}
         >
+          <GitHubIcon />
           GitHub
         </a>
         <Link href="/about" className={styles.footerLink}>

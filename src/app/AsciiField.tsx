@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import styles from "./AsciiField.module.css";
+import { characterPaths } from "./BrandMark";
 
 const GLYPHS = "01<>/\\{}[]#$%&*+=?:;.~^";
 const FRAME_MS = 1000 / 15;
@@ -9,9 +10,11 @@ const FRAME_MS = 1000 / 15;
 /**
  * Garbled text noise along the bottom of the page. Each cell keeps its own threshold, so
  * the field holds its shape while slow drifting swells thicken and thin it and a few glyphs
- * scramble every frame. Reduced motion draws one still frame and a hidden tab stops drawing.
+ * scramble every frame. Cells under the echo logo (the sibling svg, swept across all its
+ * echoes) stay empty so the noise reads as behind it. Reduced motion draws one still frame
+ * and a hidden tab stops drawing.
  */
-export function AsciiField() {
+export function AsciiField({ echoes, shift }: { echoes: number; shift: { x: number; y: number } }) {
   const ref = useRef<HTMLCanvasElement>(null);
   useEffect(() => {
     const canvas = ref.current;
@@ -20,6 +23,8 @@ export function AsciiField() {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
     const scheme = window.matchMedia("(prefers-color-scheme: dark)");
     const pick = () => GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
+    const shapes = Object.values(characterPaths).map((d) => new Path2D(d));
+    const tester = document.createElement("canvas").getContext("2d");
     let width = 0;
     let height = 0;
     let cellWidth = 0;
@@ -28,6 +33,7 @@ export function AsciiField() {
     let rows = 0;
     let grid: string[] = [];
     let seeds = new Float32Array(0);
+    let blocked = new Uint8Array(0);
     let ink = "";
     let frame = 0;
     let last = 0;
@@ -51,7 +57,47 @@ export function AsciiField() {
       grid = Array.from({ length: cols * rows }, pick);
       seeds = new Float32Array(cols * rows);
       for (let index = 0; index < seeds.length; index++) seeds[index] = Math.random();
+      blocked = silhouette(box);
       ink = getComputedStyle(canvas).color;
+    };
+
+    // Marks every cell the logo covers at full echo spread, grown by one cell for a margin.
+    const silhouette = (box: DOMRect) => {
+      const hits = new Uint8Array(cols * rows);
+      const svg = canvas.parentElement?.querySelector("svg");
+      const toLogo = svg?.getScreenCTM()?.inverse();
+      if (!tester || !toLogo) return hits;
+      const inside = (x: number, y: number) => {
+        for (let echo = 0; echo <= echoes; echo++) {
+          for (const shape of shapes) {
+            if (tester.isPointInPath(shape, x - echo * shift.x, y - echo * shift.y)) return true;
+          }
+        }
+        return false;
+      };
+      for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < cols; col++) {
+          const point = new DOMPoint(
+            box.left + (col + 0.5) * cellWidth,
+            box.top + (row + 0.5) * cellHeight,
+          ).matrixTransform(toLogo);
+          if (inside(point.x, point.y)) hits[row * cols + col] = 1;
+        }
+      }
+      const grown = hits.slice();
+      for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < cols; col++) {
+          if (!hits[row * cols + col]) continue;
+          for (let dy = -1; dy <= 1; dy++) {
+            for (let dx = -1; dx <= 1; dx++) {
+              const r = row + dy;
+              const c = col + dx;
+              if (r >= 0 && r < rows && c >= 0 && c < cols) grown[r * cols + c] = 1;
+            }
+          }
+        }
+      }
+      return grown;
     };
 
     const draw = (now: number) => {
@@ -71,7 +117,7 @@ export function AsciiField() {
           const density = base * (0.65 + swell * 0.45);
           const index = row * cols + col;
           const seed = seeds[index];
-          if (seed > density) continue;
+          if (seed > density || blocked[index]) continue;
           context.globalAlpha = 0.25 + (1 - seed / density) * 0.6;
           context.fillText(grid[index], col * cellWidth, row * cellHeight);
         }
@@ -119,6 +165,6 @@ export function AsciiField() {
       reduce.removeEventListener("change", start);
       document.removeEventListener("visibilitychange", start);
     };
-  }, []);
+  }, [echoes, shift.x, shift.y]);
   return <canvas ref={ref} className={styles.field} />;
 }
