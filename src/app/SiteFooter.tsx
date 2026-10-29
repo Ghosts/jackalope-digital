@@ -16,6 +16,9 @@ export default function SiteFooter() {
           >
             GitHub
           </a>
+          <Link href="/about" className={styles.footerLink}>
+            About
+          </Link>
           <Link href="/privacy" className={styles.footerLink}>
             Privacy
           </Link>

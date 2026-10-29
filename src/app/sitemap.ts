@@ -8,6 +8,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: "https://jackalope.digital/",
     },
     {
+      changeFrequency: "monthly",
+      priority: 0.6,
+      url: "https://jackalope.digital/about",
+    },
+    {
       changeFrequency: "yearly",
       priority: 0.3,
       url: "https://jackalope.digital/privacy",

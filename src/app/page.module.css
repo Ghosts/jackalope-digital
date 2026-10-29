@@ -147,6 +147,7 @@
   background: var(--surface-card-solid);
   border: 1px solid var(--border-subtle);
   border-radius: 13px;
+  backdrop-filter: blur(16px) saturate(1.2);
   transition:
     background 0.2s ease,
     border-color 0.2s ease,
@@ -165,16 +166,10 @@
    pointer devices collapse it and reveal on hover or keyboard focus. */
 .productLogo {
   flex-shrink: 0;
-  display: grid;
-  place-items: center;
   width: 2.6rem;
   height: 2.6rem;
   border-radius: 10px;
   overflow: hidden;
-  background: var(--accent-dim);
-  color: var(--accent-bright);
-  font-size: 1.05rem;
-  font-weight: 700;
   transition:
     width 0.35s cubic-bezier(0.16, 1, 0.3, 1),
     height 0.35s cubic-bezier(0.16, 1, 0.3, 1),
@@ -244,7 +239,6 @@
     width: 1.75rem;
     height: 1.75rem;
     border-radius: 7px;
-    font-size: 0.85rem;
   }
 
   .productMore {
@@ -275,77 +269,6 @@
   .productMore {
     transition: none;
   }
-}
-
-/* About */
-.about {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  background: var(--surface-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: 18px;
-  box-shadow: var(--shadow-surface);
-  backdrop-filter: blur(16px) saturate(1.2);
-  overflow: hidden;
-}
-
-.aboutMark {
-  height: 11rem;
-  background: linear-gradient(180deg, var(--accent-faint), transparent);
-  border-bottom: 1px solid var(--border-subtle);
-}
-
-.aboutBody {
-  display: flex;
-  flex-direction: column;
-  gap: 0.85rem;
-  padding: 1.4rem 1.6rem 1.6rem;
-}
-
-.aboutHead {
-  display: flex;
-  align-items: center;
-  gap: 0.9rem;
-}
-
-.aboutPhoto {
-  flex-shrink: 0;
-  width: 3.25rem;
-  height: 3.25rem;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid var(--border-strong);
-}
-
-.aboutTitle {
-  font-size: 1.15rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  color: var(--text-primary);
-}
-
-.aboutName {
-  font-size: 0.83rem;
-  color: var(--text-tertiary);
-}
-
-.aboutText {
-  font-size: 0.9rem;
-  line-height: 1.65;
-  color: var(--text-secondary);
-}
-
-.aboutLink {
-  align-self: flex-start;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--accent);
-  transition: color 0.2s ease;
-}
-
-.aboutLink:hover {
-  color: var(--accent-bright);
 }
 
 /* Footer */

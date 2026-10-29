@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useRef, useState } from "react";
-import { AsciiMark } from "./AsciiMark";
 import { BrandMark } from "./BrandMark";
 import { EchoBackdrop } from "./EchoBackdrop";
 import styles from "./page.module.css";
@@ -77,8 +76,7 @@ type Product = {
   href: string;
   desc: string;
   details: string;
-  /** Path in /public; products without one get a lettermark tile. */
-  logo?: string;
+  logo: string;
 };
 
 const products: Product[] = [
@@ -112,6 +110,7 @@ const products: Product[] = [
     desc: "Ops console for every SaaS product you run",
     details:
       "SEO, analytics, uptime, and content for all your products in one place. Ask questions and make changes from your AI agent over MCP, or from the CLI.",
+    logo: "/lopebase-icon.svg",
   },
 ];
 
@@ -173,11 +172,7 @@ export default function Home() {
               className={styles.productItem}
             >
               <span className={styles.productLogo} aria-hidden="true">
-                {product.logo ? (
-                  <Image src={product.logo} alt="" width={64} height={64} unoptimized />
-                ) : (
-                  product.name.charAt(0)
-                )}
+                <Image src={product.logo} alt="" width={64} height={64} unoptimized />
               </span>
               <span className={styles.productBody}>
                 <span className={styles.productHead}>
@@ -191,47 +186,6 @@ export default function Home() {
             </a>
           ))}
         </div>
-
-        <section className={styles.about} aria-labelledby="about-title">
-          <AsciiMark className={styles.aboutMark} />
-          <div className={styles.aboutBody}>
-            <div className={styles.aboutHead}>
-              <Image
-                src="/caden.jpg"
-                alt="Caden Sumner"
-                width={160}
-                height={160}
-                className={styles.aboutPhoto}
-                unoptimized
-              />
-              <div>
-                <h2 id="about-title" className={styles.aboutTitle}>
-                  About
-                </h2>
-                <p className={styles.aboutName}>Caden Sumner, founder</p>
-              </div>
-            </div>
-            <p className={styles.aboutText}>
-              Jackalope Digital is run by Caden Sumner, a senior software engineer with 8+ years of
-              building products people use every day. Caden has led growth and onboarding work at
-              WeMod and Dashlane, built B2B applications at Visa, and co-founded Burgundy Labs, a
-              SaaS platform used by more than 7,000 university students.
-            </p>
-            <p className={styles.aboutText}>
-              Every product here gets the same care: clear onboarding, accessible interfaces, and
-              releases you can trust. Caden studied Computer Science and Psychology at Michigan
-              Tech.
-            </p>
-            <a
-              href="https://x.com/cadensumner"
-              target="_blank"
-              rel="noopener noreferrer me"
-              className={styles.aboutLink}
-            >
-              Follow @cadensumner on X &#8599;
-            </a>
-          </div>
-        </section>
       </main>
 
       <footer className={styles.footer}>
@@ -246,6 +200,9 @@ export default function Home() {
         >
           GitHub
         </a>
+        <Link href="/about" className={styles.footerLink}>
+          About
+        </Link>
         <Link href="/privacy" className={styles.footerLink}>
           Privacy
         </Link>
