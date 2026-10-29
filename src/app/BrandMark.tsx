@@ -1,5 +1,5 @@
 // Jackalope head mark — shared geometry with the Jackalope desktop app brand.
-const characterPaths = {
+export const characterPaths = {
   farEar: "M85 65 C77 48 74 16 84 9 C94 3 97 20 95 34 L93 62 Z",
   nearEar: "M80 68 C64 58 43 23 51 17 C60 9 79 32 88 61 Z",
   antler:
