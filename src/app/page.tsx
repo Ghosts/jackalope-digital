@@ -78,6 +78,8 @@ type Product = {
   desc: string;
   details: string;
   logo: string;
+  /** The logo is already a full rounded tile, so it fills the icon frame. */
+  tile?: boolean;
 };
 
 const products: Product[] = [
@@ -104,6 +106,7 @@ const products: Product[] = [
     details:
       "Tailor your resume to each job's ATS keywords and track every application in one place. Extensions for Chrome and Firefox work right from the job listing.",
     logo: "/resumeskip-icon.svg",
+    tile: true,
   },
   {
     name: "LopeBase",
@@ -112,6 +115,7 @@ const products: Product[] = [
     details:
       "SEO, analytics, uptime, and content for all your products in one place. Ask questions and make changes from your AI agent over MCP, or from the CLI.",
     logo: "/lopebase-icon.svg",
+    tile: true,
   },
 ];
 
@@ -163,27 +167,25 @@ export default function Home() {
           </div>
         </a>
 
-        <div className={styles.productsList}>
+        <div className={styles.apps}>
           {products.map((product) => (
             <a
               key={product.href}
               href={product.href}
               target="_blank"
               rel="noopener noreferrer"
-              className={styles.productItem}
+              className={styles.app}
             >
-              <span className={styles.productLogo} aria-hidden="true">
-                <Image src={product.logo} alt="" width={64} height={64} unoptimized />
+              <span
+                className={`${styles.appIcon} ${product.tile ? styles.appIconTile : ""}`}
+                aria-hidden="true"
+              >
+                <Image src={product.logo} alt="" width={128} height={128} unoptimized />
               </span>
-              <span className={styles.productBody}>
-                <span className={styles.productHead}>
-                  <span className={styles.productName}>{product.name} &#8599;</span>
-                  <span className={styles.productDesc}>{product.desc}</span>
-                </span>
-                <span className={styles.productMore}>
-                  <span className={styles.productDetails}>{product.details}</span>
-                </span>
-              </span>
+              <span className={styles.appName}>{product.name}</span>
+              <span className={styles.appDesc}>{product.desc}</span>
+              <span className={styles.appDetails}>{product.details}</span>
+              <span className={styles.appLink}>{new URL(product.href).hostname} &#8599;</span>
             </a>
           ))}
         </div>

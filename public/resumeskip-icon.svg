@@ -1,10 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="ResumeSkip logo">
-  <!-- Mark & Field icon / logo: flat stamp-red tile, white skip glyph with bold pencil bar -->
-  <rect x="28" y="28" width="456" height="456" rx="104" fill="#DC1F26"/>
-  <path d="M101 164 L207 256 L101 348 Z" fill="#FFFFFF"/>
-  <path d="M235 164 L341 256 L235 348 Z" fill="#FFFFFF"/>
-  <!-- Bold pencil glyph: rounded eraser, body, and sharpened tip -->
-  <path d="M 366 178 C 366 161 376 154 394 154 C 412 154 422 161 422 178 L 422 192 L 366 192 Z" fill="#FFFFFF"/>
-  <rect x="366" y="202" width="56" height="84" rx="4" fill="#FFFFFF"/>
-  <path d="M 366 296 L 422 296 L 394 358 Z" fill="#FFFFFF"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="456" height="456" viewBox="28 28 456 456" role="img" aria-label="ResumeSkip logo">
+  <!-- Sunrise mark from resume-skip public/logo.svg: an R followed by a forward chevron.
+       viewBox is cropped to the tile so it fills the app icon frame edge to edge. -->
+  <rect x="28" y="28" width="456" height="456" rx="128" fill="#1F1A17"/>
+  <g fill="none" stroke-width="56" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M136 332 V 186 H 208 A 50 50 0 0 1 208 286 H 190 L 240 332" stroke="#FFFBF5"/>
+    <path d="M318 186 L 382 259 L 318 332" stroke="#FF6B35"/>
+  </g>
 </svg>

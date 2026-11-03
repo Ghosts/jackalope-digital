@@ -131,22 +131,22 @@
   color: var(--accent);
 }
 
-/* Products */
-.productsList {
+/* Products: app cards. A 2x2 grid on wider screens, a swipeable row on phones. */
+.apps {
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
 }
 
-.productItem {
+.app {
   display: flex;
+  flex-direction: column;
   align-items: flex-start;
-  gap: 1rem;
-  padding: 0.9rem 1.2rem;
+  padding: 1.35rem 1.3rem 1.2rem;
   background: var(--surface-card-solid);
   border: 1px solid var(--border-subtle);
-  border-radius: 13px;
+  border-radius: 18px;
   backdrop-filter: blur(16px) saturate(1.2);
   transition:
     background 0.2s ease,
@@ -155,118 +155,87 @@
     transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.productItem:hover {
+.app:hover {
   background: var(--surface-card-hover);
   border-color: var(--border-strong);
   box-shadow: var(--shadow-surface);
-  transform: translateY(-2px);
+  transform: translateY(-3px);
 }
 
-/* Expanded is the default so touch screens always see the full description;
-   pointer devices collapse it and reveal on hover or keyboard focus. */
-.productLogo {
+.app:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Glyph-only logos sit on a white squircle in both themes, like a real app icon
+   (the Moxie fox has a black outline that vanishes on dark). Tile logos fill the frame. */
+.appIcon {
   flex-shrink: 0;
-  width: 2.6rem;
-  height: 2.6rem;
-  border-radius: 10px;
+  width: 3.5rem;
+  height: 3.5rem;
+  margin-bottom: 0.95rem;
+  padding: 0.6rem;
+  border-radius: 22%;
+  background: #ffffff;
+  border: 1px solid rgba(20, 16, 40, 0.1);
+  box-shadow: 0 6px 18px rgba(20, 14, 40, 0.14);
   overflow: hidden;
-  transition:
-    width 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-    height 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-    border-radius 0.35s ease;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.productLogo img {
+.appIconTile {
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+.app:hover .appIcon {
+  transform: scale(1.06);
+}
+
+.appIcon img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
 
-.productBody {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-}
-
-.productHead {
-  min-height: 1.75rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.25rem;
-}
-
-.productName {
-  font-size: 0.95rem;
-  font-weight: 650;
+.appName {
+  font-size: 1.02rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
   color: var(--text-primary);
-  white-space: nowrap;
 }
 
-.productItem:hover .productName {
+.app:hover .appName {
   color: var(--accent-bright);
 }
 
-.productDesc {
-  font-size: 0.83rem;
+.appDesc {
+  margin-top: 0.2rem;
+  font-size: 0.8rem;
+  font-weight: 550;
   color: var(--text-tertiary);
-  text-align: right;
 }
 
-.productMore {
-  display: grid;
-  grid-template-rows: 1fr;
-  margin-top: 0.4rem;
-  opacity: 1;
-  transition:
-    grid-template-rows 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-    margin-top 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-    opacity 0.3s ease;
-}
-
-.productDetails {
-  min-height: 0;
-  overflow: hidden;
-  font-size: 0.85rem;
+.appDetails {
+  flex: 1;
+  margin-top: 0.7rem;
+  font-size: 0.84rem;
   line-height: 1.6;
   color: var(--text-secondary);
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .productLogo {
-    width: 1.75rem;
-    height: 1.75rem;
-    border-radius: 7px;
-  }
-
-  .productMore {
-    grid-template-rows: 0fr;
-    margin-top: 0;
-    opacity: 0;
-  }
-
-  .productItem:hover .productLogo,
-  .productItem:focus-visible .productLogo {
-    width: 2.75rem;
-    height: 2.75rem;
-    border-radius: 10px;
-  }
-
-  .productItem:hover .productMore,
-  .productItem:focus-visible .productMore {
-    grid-template-rows: 1fr;
-    margin-top: 0.4rem;
-    opacity: 1;
-    transition-delay: 0s, 0s, 0.08s;
-  }
+.appLink {
+  margin-top: 0.9rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--accent);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .productItem,
-  .productLogo,
-  .productMore {
+  .app,
+  .appIcon {
     transition: none;
   }
 }
@@ -350,13 +319,26 @@
     gap: 1rem;
   }
 
-  .productHead {
-    flex-direction: column;
-    gap: 0.1rem;
-    align-items: flex-start;
+  /* Bleed the row to the screen edges so the next card peeks in. */
+  .apps {
+    width: calc(100% + 2.5rem);
+    margin-inline: -1.25rem;
+    padding: 0.25rem 1.25rem 0.75rem;
+    display: flex;
+    gap: 0.75rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 1.25rem;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
   }
 
-  .productDesc {
-    text-align: left;
+  .apps::-webkit-scrollbar {
+    display: none;
+  }
+
+  .app {
+    flex: 0 0 78%;
+    scroll-snap-align: start;
   }
 }
