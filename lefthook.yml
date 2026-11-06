@@ -1,8 +1,9 @@
 # Jackalope Digital lefthook baseline. Docs: https://lefthook.dev
 # Install with a `"prepare": "lefthook install"` script.
 # pre-commit touches only STAGED files so commits stay fast and never reformat the
-# whole tree (which collides with parallel sessions). pre-push runs the full
-# `verify` gate (typecheck + lint + test + knip) plus a secret scan.
+# whole tree (which collides with parallel sessions). pre-push checks what the
+# pushed commits can break (scripts/pre-push.mjs) plus a secret scan; CI runs the
+# full `verify` gate.
 # Pick the biome OR the eslint+prettier block, not both.
 
 pre-commit:
@@ -28,7 +29,7 @@ pre-push:
   parallel: true
   commands:
     verify:
-      run: bun run verify
+      run: node scripts/pre-push.mjs
     # No double quotes in this script: on Windows lefthook wraps it in sh -c "...", and
     # an inner double quote ends that string early.
     secrets:

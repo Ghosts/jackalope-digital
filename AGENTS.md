@@ -70,7 +70,9 @@ lower a lint rule or type strictness to pass a gate.
 - Package manager: **bun** (`bun.lock`, `packageManager` pinned). Node (`.nvmrc`) is
   the runtime for Next, OpenNext and Wrangler.
 - Lefthook (installed by `bun install` via `prepare`): pre-commit runs Biome on staged
-  files; pre-push runs `bun run verify` plus a gitleaks scan.
+  files; pre-push runs `scripts/pre-push.mjs` (Biome on the changed files and the
+  typecheck, skipped when no code changed; one push at a time across the machine)
+  plus a gitleaks scan. CI runs the full `bun run verify`.
 - Biome formats and lints. Knip (`knip.jsonc`) finds dead code.
 - CI (`.github/workflows/ci.yml`) runs verify and build.
 - Standards come from jackalope-digital-hub (`docs/patterns/`, `templates/`).
