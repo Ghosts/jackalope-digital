@@ -153,7 +153,7 @@ const products: Product[] = [
   },
 ];
 
-const statement = "We build software, tools, and services. Here is what is live.";
+const statement = "Building software, better";
 
 /** Card colors and arrival order, passed to CSS as custom properties. */
 function cardStyle(card: string, ink: string, index: number) {
