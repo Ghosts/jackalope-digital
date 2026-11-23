@@ -54,6 +54,15 @@
   --mark-glow: drop-shadow(0 4px 18px rgba(109, 79, 216, 0.28));
   --echo-opacity: 0.5;
 
+  /* Home page field: the shader colors, the layer the name is cut from, and how it blends.
+     Dark multiplies (white letters become windows); light screens (black letters do). */
+  --field: #7a5cf0, #f0553f, #2a1296;
+  --field-gradient: linear-gradient(135deg, #2a1296, #7a5cf0 45%, #f0553f);
+  --veil: #f7f5fc;
+  --veil-ink: #000000;
+  --veil-blend: screen;
+  --grain-filter: invert(1);
+
   --font-sans:
     var(--font-jakarta), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
     Arial, sans-serif;
@@ -107,6 +116,13 @@
     --mark-glow: drop-shadow(0 4px 18px rgba(185, 166, 242, 0.35));
     --echo-opacity: 0.4;
 
+    --field: #cebef8, #ff6a4a, #5a2ee6;
+    --field-gradient: linear-gradient(135deg, #5a2ee6, #cebef8 45%, #ff6a4a);
+    --veil: #0d0b13;
+    --veil-ink: #ffffff;
+    --veil-blend: multiply;
+    --grain-filter: none;
+
     color-scheme: dark;
   }
 }
@@ -154,6 +170,13 @@
 
   --mark-glow: drop-shadow(0 4px 18px rgba(185, 166, 242, 0.35));
   --echo-opacity: 0.4;
+
+  --field: #cebef8, #ff6a4a, #5a2ee6;
+  --field-gradient: linear-gradient(135deg, #5a2ee6, #cebef8 45%, #ff6a4a);
+  --veil: #0d0b13;
+  --veil-ink: #ffffff;
+  --veil-blend: multiply;
+  --grain-filter: none;
 
   color-scheme: dark;
 }

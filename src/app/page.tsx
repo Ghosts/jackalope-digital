@@ -1,12 +1,21 @@
 "use client";
 
+import { Anybody } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
-import { useCallback, useRef, useState } from "react";
+import { type CSSProperties, useCallback, useRef, useState } from "react";
 import { BrandMark } from "./BrandMark";
-import { EchoBackdrop } from "./EchoBackdrop";
+import { FluidBackdrop } from "./FluidBackdrop";
 import { GitHubIcon } from "./GitHubIcon";
 import styles from "./page.module.css";
+
+// Display type with a width axis, so titles can start condensed and widen as they arrive.
+const anybody = Anybody({
+  subsets: ["latin"],
+  axes: ["wdth"],
+  display: "swap",
+  variable: "--font-anybody",
+});
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -80,6 +89,19 @@ type Product = {
   logo: string;
   /** The logo is already a full rounded tile, so it fills the icon frame. */
   tile?: boolean;
+  /** Solid card color and the text color on it. Text must keep 4.5:1 against the card. */
+  card: string;
+  ink: string;
+  /** Three colors the background field eases toward while the card is hovered or focused. */
+  palette: string;
+};
+
+const INK = "#0d0b13";
+
+const feature = {
+  card: "#c4b2f7",
+  ink: INK,
+  palette: "#e3d9ff,#8f6bff,#3a1cc4",
 };
 
 const products: Product[] = [
@@ -90,6 +112,9 @@ const products: Product[] = [
     details:
       "Keeps your docs in step with your code. Moxie reads your repos, flags the docs a change makes stale, and gives coding agents your conventions over MCP.",
     logo: "/moxie-fox.svg",
+    card: "#f0553f",
+    ink: INK,
+    palette: "#ffb199,#ed4530,#7a1206",
   },
   {
     name: "AllMCPs",
@@ -98,15 +123,21 @@ const products: Product[] = [
     details:
       "Find Model Context Protocol servers for the tools you already use, so your AI assistant can work with them directly.",
     logo: "/allmcps-icon.svg",
+    card: "#3fd0ff",
+    ink: INK,
+    palette: "#00e5ff,#007bff,#0a1a6b",
   },
   {
     name: "ResumeSkip",
     href: "https://resumeskip.com",
-    desc: "ATS resume tailor, tracker & browser extension",
+    desc: "ATS resume tailor, tracker and browser extension",
     details:
       "Tailor your resume to each job's ATS keywords and track every application in one place. Extensions for Chrome and Firefox work right from the job listing.",
     logo: "/resumeskip-icon.svg",
     tile: true,
+    card: "#ffb347",
+    ink: INK,
+    palette: "#ffd9a8,#ff6b35,#8a2a00",
   },
   {
     name: "LopeBase",
@@ -116,8 +147,18 @@ const products: Product[] = [
       "SEO, analytics, uptime, and content for all your products in one place. Ask questions and make changes from your AI agent over MCP, or from the CLI.",
     logo: "/lopebase-icon.svg",
     tile: true,
+    card: "#7b52c9",
+    ink: "#ffffff",
+    palette: "#cdb4ff,#7b52c9,#27105e",
   },
 ];
+
+const statement = "We build software, tools, and services. Here is what is live.";
+
+/** Card colors and arrival order, passed to CSS as custom properties. */
+function cardStyle(card: string, ink: string, index: number) {
+  return { "--card": card, "--card-ink": ink, "--i": index } as CSSProperties;
+}
 
 export default function Home() {
   const [toast, setToast] = useState<string | null>(null);
@@ -133,61 +174,96 @@ export default function Home() {
   }, []);
 
   return (
-    <div className={styles.page}>
+    <div className={`${styles.page} ${anybody.variable}`}>
       <script
         type="application/ld+json"
         // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD built from constants
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <EchoBackdrop />
+      <FluidBackdrop />
+
+      {/* Blended with the canvas: the name and mark are windows onto the field. */}
+      <header className={styles.veil}>
+        <div className={styles.lockup}>
+          <h1 className={styles.name}>
+            Jackalope
+            <br />
+            Digital
+          </h1>
+          <BrandMark className={styles.heroMark} />
+        </div>
+      </header>
+      <div className={styles.grain} aria-hidden="true" />
 
       <main className={styles.contentWrapper}>
-        <header className={styles.header}>
-          <BrandMark className={styles.mark} />
-          <h1 className={styles.title}>Jackalope Digital</h1>
-          <p className={styles.subtitle}>software · tools · services</p>
-        </header>
-
-        <a
-          href="https://jackalope.dev"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={styles.feature}
-        >
-          <BrandMark className={styles.featureMark} />
-          <div className={styles.featureBody}>
-            <span className={styles.featureTag}>New · Desktop app &amp; CLI</span>
-            <span className={styles.featureName}>Jackalope &#8599;</span>
-            <span className={styles.featureDesc}>
-              A calm desktop &amp; CLI workspace to run coding agents in parallel, keep project
-              context, and review every change.
-            </span>
-            <span className={styles.featureLink}>jackalope.dev</span>
-          </div>
-        </a>
-
-        <div className={styles.apps}>
-          {products.map((product) => (
-            <a
-              key={product.href}
-              href={product.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.app}
-            >
+        {/* Each word lights up in turn. Screen readers get the plain sentence. */}
+        <p className={styles.lede}>
+          <span className={styles.visuallyHidden}>{statement}</span>
+          <span aria-hidden="true">
+            {statement.split(" ").map((word, index) => (
               <span
-                className={`${styles.appIcon} ${product.tile ? styles.appIconTile : ""}`}
-                aria-hidden="true"
+                // biome-ignore lint/suspicious/noArrayIndexKey: a fixed sentence, never reordered
+                key={index}
+                className={styles.word}
+                style={{ "--i": index } as CSSProperties}
               >
-                <Image src={product.logo} alt="" width={128} height={128} unoptimized />
+                {word}{" "}
               </span>
-              <span className={styles.appName}>{product.name}</span>
-              <span className={styles.appDesc}>{product.desc}</span>
-              <span className={styles.appDetails}>{product.details}</span>
-              <span className={styles.appLink}>{new URL(product.href).hostname} &#8599;</span>
-            </a>
-          ))}
+            ))}
+          </span>
+        </p>
+
+        <div className={styles.cards}>
+          <a
+            href="https://jackalope.dev"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.feature}
+            data-palette={feature.palette}
+            style={cardStyle(feature.card, feature.ink, 0)}
+          >
+            <span className={styles.featureHead}>
+              <BrandMark className={styles.featureMark} />
+              <span className={`${styles.cardName} ${styles.featureName}`}>Jackalope</span>
+            </span>
+            <span className={styles.featureBody}>
+              <span className={styles.featureDesc}>
+                Run coding agents in parallel, keep project context, and review every change. A calm
+                desktop app and CLI.
+              </span>
+              <span className={styles.cardLink}>
+                jackalope.dev <span className={styles.arrow}>&#8599;</span>
+              </span>
+            </span>
+          </a>
+
+          <div className={styles.apps}>
+            {products.map((product, index) => (
+              <a
+                key={product.href}
+                href={product.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.app}
+                data-palette={product.palette}
+                style={cardStyle(product.card, product.ink, index + 1)}
+              >
+                <span
+                  className={`${styles.appIcon} ${product.tile ? styles.appIconTile : ""}`}
+                  aria-hidden="true"
+                >
+                  <Image src={product.logo} alt="" width={128} height={128} unoptimized />
+                </span>
+                <span className={`${styles.cardName} ${styles.appName}`}>{product.name}</span>
+                <span className={styles.appDesc}>{product.desc}</span>
+                <span className={styles.appDetails}>{product.details}</span>
+                <span className={styles.cardLink}>
+                  {new URL(product.href).hostname} <span className={styles.arrow}>&#8599;</span>
+                </span>
+              </a>
+            ))}
+          </div>
         </div>
       </main>
 

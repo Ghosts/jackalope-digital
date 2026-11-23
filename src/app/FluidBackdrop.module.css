@@ -1,0 +1,21 @@
+/* A CSS gradient in the field colors paints first and stays if WebGL is unavailable;
+   the canvas fades in over it once the shader is running. */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: var(--field-gradient);
+}
+
+.canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.8s linear;
+}
+
+.canvas[data-ready="true"] {
+  opacity: 1;
+}
