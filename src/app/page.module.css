@@ -454,6 +454,15 @@
     --hero-top: 4.25rem;
   }
 
+  /* Scale the featured title with the screen so it stays inside its card down to 320px. */
+  .featureMark {
+    height: 13vw;
+  }
+
+  .featureName {
+    font-size: 8.2vw;
+  }
+
   /* Bleed the row to the screen edges so the next card peeks in. */
   .apps {
     width: calc(100% + 2 * var(--gutter));
